@@ -1,27 +1,15 @@
-const express = require('express')
-const mongoose = require('mongoose')
+import express from "express";
+import dotenv from "dotenv";
+import { connectDB } from "./config/db.js";
 
-require('dotenv').config()
+dotenv.config();
 
-const app = express()
-// const listRoutes = require('./routes/listRoutes')
-// const userRoutes = require('./routes/user')
-//Middleware
-app.use(express.json())
+connectDB();
 
-app.get('/',(req,res,next)=>{
-    console.log(req.path, req.method);
-    next();
-})
+const app = express();
+app.use(express.json());
 
-// app.use('/api/lists',listRoutes)
-// app.use('/api/user',userRoutes)
-
-mongoose.connect(process.env.MONGO_URI)
-.then((req,res)=>
-app.listen(process.env.PORT,()=>{
-    console.log('Connected to DB and listening on port',process.env.PORT)
-}))
-.catch((err)=>console.log(err));
-
-
+app.get("/", (req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
