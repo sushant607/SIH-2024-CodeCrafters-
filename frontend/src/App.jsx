@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from "./components/Signup/SignupPage";
 import JobPage from './components/JobPage/JobPage'
 import UpdateProfile from "./components/Profile/UpdateProfile";
+import Home from "./components/Home/Home";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -13,6 +14,7 @@ function App() {
          <BrowserRouter>
          <Routes>
            <Route path="/" element={<SignupPage />} />
+           <Route path="/home" element={<Home />} />
            <Route path="/login" element={<LoginPage />} />
            <Route path="/job" element={<JobPage />} />
            <Route path="/UpdateProfile" element={<UpdateProfile />} />

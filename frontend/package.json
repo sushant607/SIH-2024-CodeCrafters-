@@ -15,7 +15,7 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "redux": "^5.0.1",
-    "router": "^1.3.8"
+    "router": "^1.3.8",
     "frontend": "file:",
     "axios": "^1.7.5",
     "react": "^18.3.1",
