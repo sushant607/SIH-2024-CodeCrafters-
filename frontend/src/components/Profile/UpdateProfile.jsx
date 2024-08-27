@@ -30,9 +30,9 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="profile-container">
-      <div className="profile-form-container card">
-        <h1 className="profile-title">User Profile</h1>
+    <main className="profile-container">
+      <section className="profile-form-container card">
+        <h1 className="profile-title">BUILD YOUR PROFILE</h1>
         <form onSubmit={handleSubmit} className="profile-form">
           <div className="form-group">
             <label htmlFor="userName">User Name:</label>
@@ -44,7 +44,6 @@ const UpdateProfile = () => {
               placeholder="Enter Name"
               className="brutalist-input"
             />
-            <label className="brutalist-label">NAME</label>
           </div>
 
           <div className="form-group">
@@ -57,7 +56,6 @@ const UpdateProfile = () => {
               placeholder="Enter Email"
               className="brutalist-input"
             />
-            <label className="brutalist-label">EMAIL</label>
           </div>
 
           <div className="form-group">
@@ -69,7 +67,6 @@ const UpdateProfile = () => {
               placeholder="Enter Skills"
               className="brutalist-input"
             />
-            <label className="brutalist-label">SKILLS</label>
           </div>
 
           <div className="form-group">
@@ -95,10 +92,16 @@ const UpdateProfile = () => {
             {photo && <img src={photo} alt="Profile" className="profile-photo" />}
           </div>
 
-          <button type="submit" className="submit-button">Update Profile</button>
+          <button type="submit" className="button">Create Profile</button>
         </form>
-      </div>
-    </div>
+      </section>
+      <section className="profile-image-container">
+      <h1 style={{fontFamily:"monospace"}}className="font-bold h-auto text-3xl self-center text-black py-10">
+     "Little things make big days"
+            </h1>
+        <img className="object-fill" src="/3714960.jpg" alt="Decorative" />
+      </section>
+    </main>
   );
 };
 
