@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import LoginPage from './components/Login/LoginPage'
-import './App.css'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import UpdateProfile from './components/Profile/UpdateProfile'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <LoginPage/>
+    { <UpdateProfile/>}
     </>
   )
 }

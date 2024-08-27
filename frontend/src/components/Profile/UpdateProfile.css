@@ -1,0 +1,93 @@
+/* General Container Styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: white;
+}
+
+.profile-form-container {
+  width: 320px; /* Adjust form width */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: rgb(51, 156, 216);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem; /* Slightly smaller title */
+  color: #333;
+}
+
+/* Form Styling */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.brutalist-input {
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+  font-size: 0.875rem; /* Smaller input font size */
+}
+
+.brutalist-label {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 0.875rem; /* Smaller label font size */
+}
+
+.submit-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem; /* Smaller button font size */
+}
+
+.submit-button:hover {
+  background-color: #555;
+}
+
+/* Image Styling */
+.profile-photo {
+  max-width: 80px;
+  margin-top: 10px;
+  border-radius: 50%;
+  display: block; /* Ensures the image is block level */
+  margin-left: auto;
+  margin-right: auto; /* Centers the image horizontally */
+}
+
+/* Card Component */
+.card {
+  width: 320px;
+  height: auto;
+  border-radius: 20px;
+  background: #e0e0e0;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+}
