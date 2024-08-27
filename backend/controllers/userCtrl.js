@@ -4,8 +4,9 @@ import { user } from "../models/user.js";
 
 const loginController = async (req, res) => {
     try {
-        // Find user by email
-        const existingUser = await user.findOne({ email: req.body.email });
+        // Find user by username
+        console.log('mila')
+        const existingUser = await user.findOne({ username: req.body.username });
         if (!user) {
           return res
             .status(200)
@@ -15,13 +16,13 @@ const loginController = async (req, res) => {
         if (!isMatch) {
           return res
             .status(200)
-            .send({ message: "Invalid EMail or Password", success: false });
+            .send({ message: "Invalid username or Password", success: false });
         }
-        const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1d",  });
+        // const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1d",  });
         res.status(200).json({
             success: true,
             message: 'Logged in successfully',
-            token
+            // token
         });
     } catch (error) {
         console.error(error);
@@ -30,8 +31,9 @@ const loginController = async (req, res) => {
 };
 
 const registerController = async (req, res) => {
+  console.log('mila')
     try {
-        const exisitingUser = await user.findOne({ email: req.body.email });
+        const exisitingUser = await user.findOne({ username: req.body.username });
         if (exisitingUser) {
           return res
             .status(200)

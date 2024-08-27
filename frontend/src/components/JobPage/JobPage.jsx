@@ -5,14 +5,15 @@ const JobPage = () => {
         "company":"Google",
         "jobTitle":"Software Intern",
         "jobDescription":"This is a job description for a software intern.",
-        "companyDescription":"this is the company description"
+        "companyDescription":"this is the company description",
+        "image":"https://cdn.rareblocks.xyz/collection/clarity/images/hero/1/background-pattern.png"
     }    
     return (
         <div className="bg-gray-50">
 
     <section className="relative py-12 sm:py-16 lg:pb-40">
         <div className="absolute bottom-0 right-0 overflow-hidden">
-            <img className="w-full h-auto origin-bottom-right transform scale-150 lg:w-auto lg:mx-auto lg:object-cover lg:scale-75" src="https://cdn.rareblocks.xyz/collection/clarity/images/hero/1/background-pattern.png" alt="" />
+            <img className="w-full h-auto origin-bottom-right transform scale-150 lg:w-auto lg:mx-auto lg:object-cover lg:scale-75" src={Job.image} alt="" />
         </div>
 
         <div className="relative px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
