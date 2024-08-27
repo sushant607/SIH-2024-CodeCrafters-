@@ -1,44 +1,37 @@
-import { useState, React } from "react";
-import styles from "./LoginPage.module.css"; 
-
-function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
+import {useState,React} from "react";
+const SignupPage = () => {
+    const [username,setUsername]=useState('');
+    const [password,setPassword]=useState('');
   return (
     <>
-      <main className="flex flex-row bg-white">
-        <section className="w-2/3 flex flex-col items-center pl-10">
-          <h1
-            style={{ fontFamily: "monospace" }}
-            className={`${styles.fontBold} h-auto text-3xl self-center text-black py-10`}
-          >
+      <main className="flex flex-row ">
+      <section className="items-center w-1/3">
+          <img className="object-fit" src="/10993431.jpg" alt="" />
+        </section>
+        <section className="w-2/3 flex flex-col items-center">
+            <h1 style={{fontFamily:"monospace"}}className="font-bold h-auto text-3xl self-center text-black py-10">
             EVERY GREAT WORK BEGINS WITH A DREAM
-          </h1>
-          <div className="flex flex-col p-10 justify-stretch">
-            <div className={styles.brutalistContainer}>
+            </h1>
+          <div  className="flex flex-col p-10 justify-stretch">
+            <div className="brutalist-container">
               <input
                 placeholder="TYPE HERE"
-                className={`${styles.brutalistInput} ${styles.smoothType}`}
+                className="brutalist-input smooth-type"
                 type="text"
                 value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
+                onChange={(e)=>{setUsername(e.target.value)}}
               />
-              <label className={styles.brutalistLabel}>NAME</label>
+              <label className="brutalist-label">NAME</label>
             </div>
-            <div className={styles.brutalistContainer}>
+            <div className="brutalist-container">
               <input
                 placeholder="TYPE HERE"
-                className={`${styles.brutalistInput} ${styles.smoothType}`}
+                className="brutalist-input smooth-type"
                 type="password"
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={(e)=>{setPassword(e.target.value)}}
               />
-              <label className={styles.brutalistLabel}>PASSWORD</label>
+              <label className="brutalist-label">PASSWORD</label>
             </div>
           </div>
           <div className="flex items-center">
@@ -57,12 +50,9 @@ function LoginPage() {
             </button>
           </div>
         </section>
-        <section className="items-center">
-          <img className="object-fill" src="/3682888.jpg" alt="" />
-        </section>
       </main>
     </>
-  );
+  )
 }
 
-export default LoginPage;
+export default SignupPage
