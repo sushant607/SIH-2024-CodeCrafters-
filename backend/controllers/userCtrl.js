@@ -5,7 +5,6 @@ import { user } from "../models/user.js";
 const loginController = async (req, res) => {
     try {
         // Find user by username
-        console.log('mila')
         const existingUser = await user.findOne({ username: req.body.username });
         if (!user) {
           return res
@@ -31,7 +30,6 @@ const loginController = async (req, res) => {
 };
 
 const registerController = async (req, res) => {
-  console.log('mila')
     try {
         const exisitingUser = await user.findOne({ username: req.body.username });
         if (exisitingUser) {

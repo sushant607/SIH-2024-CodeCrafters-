@@ -1,0 +1,39 @@
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  skills: {
+    type: [String], 
+    required: true,
+  },
+  resume: {
+    type: String,
+    required: false,
+  },
+  photo: {
+    type: String,
+    required: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+}, { timestamps: true });
+
+export const Freelancer = mongoose.model('Freelancer', userSchema);

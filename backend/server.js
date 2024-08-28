@@ -4,7 +4,8 @@ import colors from "colors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import {connectDB} from "./config/db.js";
-import { router, router as userRoutes } from "./routes/userRoutes.js";
+import { router as userRoutes } from "./routes/userRoutes.js";
+import { router as jobsRoutes } from "./routes/jobRoutes.js";
 import cors from "cors";
 //dotenv conig
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(morgan("dev"));
 app.use(router);
 //routes
 app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/jobs", jobsRoutes);
 
 //port
 const port = process.env.PORT || 4000;
