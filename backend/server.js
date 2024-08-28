@@ -18,7 +18,6 @@ app.use(cors())
 //middlewares
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(router);
 //routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/jobs", jobsRoutes);
