@@ -42,6 +42,9 @@ const registerController = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         req.body.password = hashedPassword;
+        const role = req.body.role;
+        req.body.isFreelancer = role === "user";
+        req.body.isEmployee = role === "org";
        // Create a new user instance
        const newUser = new user(req.body);
        await newUser.save();
