@@ -17,11 +17,11 @@ const loginController = async (req, res) => {
             .status(200)
             .send({ message: "Invalid username or Password", success: false });
         }
-        // const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1d",  });
+        const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1d",  });
         res.status(200).json({
             success: true,
             message: 'Logged in successfully',
-            // token
+            token
         });
     } catch (error) {
         console.error(error);

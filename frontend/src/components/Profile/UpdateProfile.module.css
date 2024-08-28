@@ -1,5 +1,5 @@
 /* General Container Styling */
-body, html {
+/* body, html {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -8,7 +8,7 @@ body, html {
   justify-content: center;
   align-items: center;
   background-color: white;
-}
+} */
 
 .profile-container {
   display: flex;

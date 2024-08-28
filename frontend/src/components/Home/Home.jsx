@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import animation from "../../../public/home-image.png";
+import animation from "/home-image.png";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {

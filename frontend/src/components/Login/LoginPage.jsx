@@ -7,23 +7,28 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async () => {
-    try {
-      const res = await axios.post("http://localhost:4000/api/v1/user/signin", {
-        username:username,
-        password:password,
-      });
-      if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        console.log('success')
-        navigate("/");
-      } else {
-        // message.error(res.data.message);
-        console.log('fail')
-      }
-    } catch (error) {
-      console.log(error);
-      // message.error("something went wrong");
+   
+  try {
+    const res = await axios.post("http://localhost:4000/api/v1/user/signin", {
+      username: username,
+      password: password,
+    });
+
+    if (res.data.success) {
+      // Store token and user type in localStorage
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userType", res.data.userType); // Store the user type received from the server
+
+      console.log('Login successful');
+      navigate("/"); // Redirect to the appropriate page (e.g., home or dashboard)
+    } else {
+      console.log('Login failed:', res.data.message);
+      // Handle error (e.g., show error message)
     }
+  } catch (error) {
+    console.log('An error occurred:', error);
+    // Handle unexpected errors (e.g., show error message)
+  }
   };
   return (
     <>
@@ -31,7 +36,7 @@ function LoginPage() {
         <section className="w-2/3 flex flex-col items-center pl-3">
           <h1
             style={{ fontFamily: "monospace" }}
-            className={`${styles.fontBold} h-auto text-3xl self-center text-black py-10`}
+            className={`${styles.fontBold} h-auto text-2xl self-center font-bold text-black pl-10 py-10`}
           >
             EVERY GREAT WORK BEGINS WITH A DREAM
           </h1>
@@ -60,6 +65,9 @@ function LoginPage() {
               />
               <label className={styles.brutalistLabel}>PASSWORD</label>
             </div>
+            <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center" >New user?
+              <Link to="/signup" style={{color:"#372bb2"}} className="underline">SIGNUP</Link>
+              </p>
           </div>
           <div className="flex items-center">
             <button

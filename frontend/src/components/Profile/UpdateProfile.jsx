@@ -18,7 +18,6 @@ const UpdateProfile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Display a prompt message
     alert('Profile updated successfully!');
     console.log({
       userName,
@@ -30,7 +29,18 @@ const UpdateProfile = () => {
   };
 
   return (
-    <main className={styles['profile-container']}>
+    <main
+      className={styles['profile-container']}
+      style={{
+        margin: 0,
+        padding: 0,
+        fontFamily: 'Arial, sans-serif',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+      }}
+    >
       <section className={`${styles['profile-form-container']} ${styles['card']}`}>
         <h1 className={styles['profile-title']}>BUILD YOUR PROFILE</h1>
         <form onSubmit={handleSubmit} className={styles['profile-form']}>
