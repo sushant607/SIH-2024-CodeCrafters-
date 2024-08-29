@@ -32,8 +32,8 @@ function LoginPage() {
   };
   return (
     <>
-      <main className="flex flex-row bg-white w-full">
-        <section className="w-2/3 flex flex-col items-center pl-3">
+      <main className="flex flex-row bg-white w-full justify-center items-center">
+        <section className="w-fit flex flex-col items-center pl-3">
           <h1
             style={{ fontFamily: "monospace" }}
             className={`${styles.fontBold} h-auto text-2xl self-center font-bold text-black pl-10 py-10`}
@@ -72,7 +72,7 @@ function LoginPage() {
           <div className="flex items-center">
             <button
               style={{ fontFamily: "monospace" }}
-              className="overflow-hidden relative w-32 p-2 h-12 bg-black text-white border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group"
+              className="overflow-hidden w-32 p-2 h-12 bg-black text-white border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group"
               onClick={handleSubmit}
             >
               LOGIN
@@ -85,8 +85,8 @@ function LoginPage() {
             </button>
           </div>
         </section>
-        <section className="items-center">
-          <img className="object-fill" src="/3682888.jpg" alt="" />
+        <section className="hidden xl:flex items-center">
+          <img className="object-contain h-screen" src="/3682888.jpg" alt="" />
         </section>
       </main>
     </>

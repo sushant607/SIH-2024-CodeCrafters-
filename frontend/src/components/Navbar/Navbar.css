@@ -3,6 +3,7 @@ nav {
   align-items: center;
   padding: 1em 2em;
   height: fit-content;
+  color: black;
 }
 .nav-header {
   font-family: "Poppins", sans-serif;
@@ -11,7 +12,7 @@ nav {
   justify-content: start;
   gap: 2em;
   padding: 0 2em;
-  height: inherit;
+  /* height: inherit; */
 }
 .title-header {
   font-size: 1.75em;
