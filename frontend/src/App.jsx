@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
 import OrgNavbar from "./components/OrgNavbar/OrgNavbar";
 import JobList from "./components/JobList/JobList";
+import AddJob from "./components/AddJob/AddJob";
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
           <Route path='/job/:id' element={<JobPage />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/UpdateUserProfile' element={<UpdateProfile />} />
+          <Route path='/addjob' element={<AddJob/>} />
         </Routes>
         <Footer/>
       </BrowserRouter>
