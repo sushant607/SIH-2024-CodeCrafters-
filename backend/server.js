@@ -7,6 +7,7 @@ import {connectDB} from "./config/db.js";
 import { router as userRoutes } from "./routes/userRoutes.js";
 import { router as jobsRoutes } from "./routes/jobRoutes.js";
 import { router as freelancerRoutes } from "./routes/freelancerRoutes.js";
+import { router as organisationRoutes } from "./routes/organisationRoutes.js";
 import cors from "cors";
 //dotenv conig
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/jobs", jobsRoutes);
 app.use("/api/v1/freelancer", freelancerRoutes);
+app.use("/api/v1/org", organisationRoutes);
 
 //port
 const port = process.env.PORT || 4000;

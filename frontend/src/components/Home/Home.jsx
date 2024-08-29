@@ -4,6 +4,9 @@ import animation from "/home-image.png";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
+  const userType = localStorage.getItem("userType");
+  const isLoggedIn = localStorage.getItem("token");
+  console.log()
   return (
     <main className='home-cont'>
       <section className='content'>
@@ -13,11 +16,11 @@ const Home = () => {
           connect with skilled freelancers. Browse profiles, review portfolios,
           and hire the right talent for your projects.
         </p>
-        <NavLink to={"/signup"} style={{ textDecoration: "none" }}>
+        <NavLink to={isLoggedIn?userType==='user'?'/joblist':'/postjob':"/signup"} style={{ textDecoration: "none" }}>
           {/*signup*/}
           <div className='signup-button'>
             <button className='cta'>
-              <span className='span'>SIGN UP</span>
+              <span className='span'>{isLoggedIn?userType==='user'?'FIND JOBS':'POST JOB':"SIGNUP"}</span>
               <span className='second'>
                 <svg
                   xmlnsXlink='http://www.w3.org/1999/xlink'

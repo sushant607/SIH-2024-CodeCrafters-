@@ -126,7 +126,7 @@ function SignupPage() {
             </div>
           </div>
           <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center pb-2" >Already a user? 
-              <Link to="/signup" style={{color:"#372bb2"}} className="underline">SIGNUP</Link>
+              <Link to="/login" style={{color:"#372bb2"}} className="underline">LOGIN</Link>
               </p>
           <div className="flex items-center">
             <button

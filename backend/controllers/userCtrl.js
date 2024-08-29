@@ -21,7 +21,8 @@ const loginController = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'Logged in successfully',
-            token
+            token,
+            userType:existingUser.isFreelancer?'user':'org'
         });
     } catch (error) {
         console.error(error);

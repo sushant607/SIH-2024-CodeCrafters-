@@ -6,6 +6,7 @@ import OrgNavbar from "../OrgNavbar/OrgNavbar";
 const Navbar = () => {
   const userType = localStorage.getItem("userType");
   const isLoggedIn = localStorage.getItem("token");
+  console.log("isloggedin",isLoggedIn)
   const navigate = useNavigate();
   if (!isLoggedIn) {
     return (<nav>

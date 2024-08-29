@@ -65,7 +65,7 @@ function LoginPage() {
               />
               <label className={styles.brutalistLabel}>PASSWORD</label>
             </div>
-            <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center" >New user?
+            <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center" >New user? 
               <Link to="/signup" style={{color:"#372bb2"}} className="underline">SIGNUP</Link>
               </p>
           </div>

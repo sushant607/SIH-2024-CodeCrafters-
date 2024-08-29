@@ -1,5 +1,5 @@
 import express from "express";
-import { createJobController, getAllJobsController, getJobByIdController } from "../controllers/jobsCtrl.js";
+import { createJobController, getAllJobsController, getJobByIdController, updateJobController, deleteJobController, viewJobsCompanySpecific } from "../controllers/jobsCtrl.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -13,5 +13,14 @@ router.get("/get_all_job", authMiddleware, getAllJobsController);
 
 //VIEW_JOB || GET
 router.get("/get_id_job/:id", authMiddleware, getJobByIdController);
+
+//UPDATE_JOB || POST
+router.post("/update_id_job/:id", authMiddleware, updateJobController);
+
+//DELETE_JOB || POST
+router.post("/delete_id_job/:id", authMiddleware, deleteJobController);
+
+//VIEW_JOBS_COMPANY || GET
+router.get("/get_all_job", authMiddleware, viewJobsCompanySpecific);
 
 export { router };

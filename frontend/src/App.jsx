@@ -19,6 +19,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/userhome' element={<Home />} />
           <Route path='/orghome' element={<Home />} />
           <Route path='/login' element={<LoginPage />} />
