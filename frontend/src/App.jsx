@@ -8,7 +8,6 @@ import UpdateProfile from "./components/Profile/UpdateProfile";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
-import OrgNavbar from "./components/OrgNavbar/OrgNavbar";
 import JobList from "./components/JobList/JobList";
 function App() {
   return (
@@ -17,6 +16,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/userhome' element={<Home />} />
           <Route path='/orghome' element={<Home />} />
           <Route path='/login' element={<LoginPage />} />

@@ -1,6 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 const OrgNavbar = () => {
+  const navigate=useNavigate()
+  const logout=()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('userType')
+    navigate('/')
+    window.location.reload();
+  }
   return (
     <div className="relative z-10 py-4 md:py-6" x-data="{expanded: false}">
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
@@ -89,6 +96,7 @@ const OrgNavbar = () => {
               title=""
               className="inline-flex items-center justify-center px-6 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
               role="button"
+              onClick={logout}
             >
               Logout
             </Link>
