@@ -29,7 +29,7 @@ function App() {
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />
           <Route path='/signup' element={<SignupPage />} />
-          <Route path='/UpdateUserProfile' element={<UpdateProfile />} />
+          <Route path='/UpdateUserProfile' element={<UpdateUserProfile />} />
           <Route path='/addjob' element={<AddJob/>} />
         </Routes>
         <Footer/>
