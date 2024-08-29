@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './UpdateProfile.module.css';
 
-const UpdateProfile = () => {
+const UpdateUserProfile = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [skills, setSkills] = useState('');
@@ -115,4 +115,4 @@ const UpdateProfile = () => {
   );
 };
 
-export default UpdateProfile;
+export default UpdateUserProfile;
