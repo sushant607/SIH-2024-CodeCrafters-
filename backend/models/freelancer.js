@@ -26,6 +26,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  notification: {
+    type: Array,
+    default: [],
+  },
+  seen_notification: {
+    type: Array,
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: Date.now,

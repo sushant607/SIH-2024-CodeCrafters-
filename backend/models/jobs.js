@@ -20,6 +20,7 @@ const jobSchema = new mongoose.Schema({
     },
     contact_information: String,
     company_description: String,
+    Applicants: [String],
   }, { timestamps: true });
 
   export const Job = mongoose.model('Job', jobSchema);

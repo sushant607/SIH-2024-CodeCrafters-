@@ -25,14 +25,6 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  notification: {
-    type: Array,
-    default: [],
-  },
-  seen_notification: {
-    type: Array,
-    default: [],
-  },
-},{ timestamps: true });
+  },{ timestamps: true });
 
 export const user = mongoose.model('user', userSchema);
