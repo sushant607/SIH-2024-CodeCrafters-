@@ -5,13 +5,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from "./components/Signup/SignupPage";
 import JobPage from "./components/JobPage/JobPage";
 import ProfileSection from "./components/ViewProfile/Profile";
-import CreateProfile from "./components/UserProfile/createProfile";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
 import UpdateOrgProfile from "./components/OrgProfile/OrgProfile";
 import JobList from "./components/JobList/JobList";
+import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
+import CreateProfile from "./components/UserProfile/createProfile";
 import OrgPageListing from "./components/OrgPageList/OrgPageListing";
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path='/orgJobList' element={<OrgPageListing />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/createProfile' element={<CreateProfile/>} />
+          <Route path='/updateprofile' element={<UpdateProfile/>} />
           <Route path='/userProfile' element={<ProfileSection />} />
           {/* <Route path='/orgProfile' element={<ProfileSection />} /> */}
           <Route path='/currentjobs' element={<JobPage />} />

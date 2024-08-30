@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './createProfile.module.css';
+import styles from './UpdateProfile.module.css';
 
 const UpdateProfile = () => {
   const [userName, setUserName] = useState('');
@@ -45,7 +45,7 @@ const UpdateProfile = () => {
         <h1 className={styles['profile-title']}>BUILD YOUR PROFILE</h1>
         <form onSubmit={handleSubmit} className={styles['profile-form']}>
           <div className={styles['form-group']}>
-            <label htmlFor="userName">User Name:</label>
+            <label htmlFor="userName">Name:</label>
             <input
               type="text"
               id="userName"
