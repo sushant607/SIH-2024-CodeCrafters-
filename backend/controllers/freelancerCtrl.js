@@ -67,10 +67,20 @@ const FreelancerInfoController = async (req, res) => {
       });
     }
   };
-
+   const uploadImageController=async (req, res) => {
+  try {
+    const file = req.file;
+    console.log(file.originalname);
+    const image = await UploadOnCloudinary(file.path);
+    console.log(image);
+    res.json({ imageID: image.public_id, imageURL: image.url });
+  } catch (err) {
+    res.json(err);
+  }
+};
 // My jobs 
 
 // Notification 
 
-export { applyFreelancerController, FreelancerInfoController, updateProfileController };
+export { applyFreelancerController, FreelancerInfoController, updateProfileController ,uploadImageController};
   
