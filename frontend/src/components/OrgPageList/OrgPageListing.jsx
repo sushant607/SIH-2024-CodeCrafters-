@@ -5,7 +5,7 @@ import { PiBagFill } from "react-icons/pi";
 import { MdCalendarMonth } from "react-icons/md";
 import { IoFilterSharp } from "react-icons/io5";
 import { HiOutlineBookmark } from "react-icons/hi2";
-function JobList() {
+function OrgPageListing() {
     const [search, setSearch] = useState("");
     const [workingSchedule, setWorkingSchedule] = useState([]);
     const [employmentType, setEmploymentType] = useState([]);
@@ -307,4 +307,4 @@ function JobList() {
   );
 }
 
-export default JobList
+export default OrgPageListing;
