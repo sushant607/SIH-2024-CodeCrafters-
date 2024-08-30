@@ -1,6 +1,6 @@
 import { user } from "../models/user.js";
 import { Freelancer } from "../models/freelancer.js";
-
+import UploadOnCloudinary from "../util/upload.js";
 // Create Freelancer
 const applyFreelancerController = async (req, res) => {
     try {
