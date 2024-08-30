@@ -63,7 +63,7 @@ const OrgNavbar = () => {
 
           <div className="hidden md:flex md:items-center md:justify-center md:space-x-10 md:absolute md:inset-y-0 md:left-1/2 md:-translate-x-1/2 lg:space-x-16">
             <Link
-              to="/manageListings"
+              to="/orgJobList"
               title=""
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
             >
@@ -72,7 +72,7 @@ const OrgNavbar = () => {
             </Link>
 
             <Link
-              to="/postjob"
+              to="/addjob"
               title=""
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
             >

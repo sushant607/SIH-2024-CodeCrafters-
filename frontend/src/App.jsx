@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignupPage from "./components/Signup/SignupPage";
 import JobPage from "./components/JobPage/JobPage";
 import ProfileSection from "./components/ViewProfile/Profile";
-import UpdateUserProfile from "./components/UserProfile/UpdateProfile";
+import CreateProfile from "./components/UserProfile/createProfile";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
@@ -27,11 +27,13 @@ function App() {
           <Route path='/job' element={<JobPage />} />
           <Route path='/updateOrgProfile' element={<UpdateOrgProfile />} />
           <Route path='/jobList' element={<JobList />} />
+          <Route path='/orgJobList' element={<OrgPageListing />} />
           <Route path='/signup' element={<SignupPage />} />
-          <Route path='/profile' element={<ProfileSection />} />
+          <Route path='/createProfile' element={<CreateProfile/>} />
+          <Route path='/userProfile' element={<ProfileSection />} />
+          {/* <Route path='/orgProfile' element={<ProfileSection />} /> */}
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />
-          <Route path='/updateUserProfile' element={<UpdateUserProfile />} />
           <Route path='/addjob' element={<AddJob/>} />
         </Routes>
         <Footer/>

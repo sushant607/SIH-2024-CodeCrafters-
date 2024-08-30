@@ -1,246 +1,239 @@
-import React, { useState } from 'react'
-import { FaSearch } from "react-icons/fa";
-import { IoLocationSharp } from "react-icons/io5";
-import { PiBagFill } from "react-icons/pi";
-import { MdCalendarMonth } from "react-icons/md";
-import { IoFilterSharp } from "react-icons/io5";
+import React, { useState,useEffect } from 'react';
 import { HiOutlineBookmark } from "react-icons/hi2";
+import axios from "axios";
 function JobList() {
-    const [search, setSearch] = useState("");
-    const [workingSchedule, setWorkingSchedule] = useState([]);
-    const [employmentType, setEmploymentType] = useState([]);
+  const [search, setSearch] = useState("");
+  const [workingSchedule, setWorkingSchedule] = useState([]);
+  const [employmentType, setEmploymentType] = useState([]);
+  const [jobs, setJobs] = useState([]);
 
-    const handleWorkingScheduleChange = (e) => {
-        const { value, checked } = e.target;
-        setWorkingSchedule((prev) =>
-        checked ? [...prev, value] : prev.filter((item) => item !== value)
-        );
-    };
+  useEffect(() => {
+    axios.get('http://localhost:4000/api/v1/jobs/get_all_job')
+      .then(response => setJobs(response.data))
+      .catch(error => console.error('Error fetching jobs:', error));
+  }, []);
 
-    const handleEmploymentTypeChange = (e) => {
-        const { value, checked } = e.target;
-        setEmploymentType((prev) =>
-        checked ? [...prev, value] : prev.filter((item) => item !== value)
-        );
-    };
-    const jobs = [
-        {
-          id: 1,
-          company: "Amazon",
-          title: "Senior UI/UX Designer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Part time"],
-          bgColor: "bg-orange-200",
-          logo: "../../assets/AmazonLogo.jpg",
-        },
-        {
-          id: 2,
-          company: "Google",
-          title: "Full Stack Web Developer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Distant"],
-          bgColor: "bg-green-200",
-          logo: "../../assets/AmazonLogo.jpg",
-        },
-        {
-          id: 3,
-          company: "Facebook",
-          title: "Senior UI/UX Designer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Project Work"],
-          bgColor: "bg-purple-200",
-          logo: "../../assets/AmazonLogo.jpg",
-        },
-        {
-          id: 4,
-          company: "Amazon",
-          title: "Senior UI/UX Designer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Part time"],
-          bgColor: "bg-blue-100",
-          logo: "../../assets/AmazonLogo.jpg",
-        },
-        {
-          id: 5,
-          company: "Amazon",
-          title: "Senior UI/UX Designer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Senior level"],
-          bgColor: "bg-pink-100",
-          logo: "../../assets/AmazonLogo.jpg",
-        },
-        {
-          id: 6,
-          company: "Amazon",
-          title: "Senior UI/UX Designer",
-          datePosted: "20 May, 2024",
-          salary: "$250 /hr",
-          location: "San Francisco, CA",
-          employmentTypes: ["Part time", "Senior level", "Distant", "Project Work"],
-          bgColor: "bg-gray-200",
-          logo: "../../assets/AmazonLogo.jpg",
-        }
-      ];
-      const filteredJobs = jobs.filter((job) => {
-        const searchTerm = search.toLowerCase();
-        const matchesSearch =
-          searchTerm === "" ||
-          job.title.toLowerCase().includes(searchTerm) ||
-          job.company.toLowerCase().includes(searchTerm) ||
-          job.location.toLowerCase().includes(searchTerm);
-    
-        const matchesWorkingSchedule =
-          workingSchedule.length === 0 ||
-          workingSchedule.some((schedule) =>
-            job.employmentTypes.includes(schedule)
-          );
-    
-        const matchesEmploymentType =
-          employmentType.length === 0 ||
-          employmentType.some((type) => job.employmentTypes.includes(type));
-    
-        return matchesSearch && matchesWorkingSchedule && matchesEmploymentType;
-      });
+  const handleWorkingScheduleChange = (e) => {
+    const { value, checked } = e.target;
+    setWorkingSchedule((prev) =>
+      checked ? [...prev, value] : prev.filter((item) => item !== value)
+    );
+  };
+
+  const handleEmploymentTypeChange = (e) => {
+    const { value, checked } = e.target;
+    setEmploymentType((prev) =>
+      checked ? [...prev, value] : prev.filter((item) => item !== value)
+    );
+  };
+
+  // const jobs = [
+  //   {
+  //     id: 1,
+  //     role: "Senior UI/UX Designer",
+  //     job_description: "Design and implement user interfaces...",
+  //     skills_required: ["Figma", "Sketch", "Adobe XD"],
+  //     experience_level: "Mid Level",
+  //     compensation: "$250/hr",
+  //     project_duration: "Permanent",
+  //     application_deadline: new Date("2024-09-15"),
+  //     location_requirements: "On-site",
+  //     contact_information: "hr@company.com",
+  //     company_description: "A leading tech company...",
+  //     Applicants: ["John Doe", "Jane Smith"],
+  //     bgColor: "bg-orange-200",
+  //     logo: "../../assets/AmazonLogo.jpg",
+  //     company: "Amazon",
+  //   },
+  //   {
+  //     id: 2,
+  //     role: "Full Stack Web Developer",
+  //     job_description: "Develop and maintain web applications...",
+  //     skills_required: ["React", "Node.js", "MongoDB"],
+  //     experience_level: "Senior Level",
+  //     compensation: "$300/hr",
+  //     project_duration: "Contract",
+  //     application_deadline: new Date("2024-09-20"),
+  //     location_requirements: "Remote",
+  //     contact_information: "careers@company.com",
+  //     company_description: "Innovating the future...",
+  //     Applicants: ["Alice Johnson"],
+  //     bgColor: "bg-green-200",
+  //     logo: "../../assets/GoogleLogo.jpg",
+  //     company: "Google",
+  //   },
+  //   {
+  //     id: 3,
+  //     role: "Full Stack Web Developer",
+  //     job_description: "Develop and maintain web applications...",
+  //     skills_required: ["React", "Node.js", "MongoDB"],
+  //     experience_level: "Senior Level",
+  //     compensation: "$300/hr",
+  //     project_duration: "Contract",
+  //     application_deadline: new Date("2024-09-20"),
+  //     location_requirements: "Remote",
+  //     contact_information: "careers@company.com",
+  //     company_description: "Innovating the future...",
+  //     Applicants: ["Alice Johnson"],
+  //     bgColor: "bg-purple-200",
+  //     logo: "../../assets/GoogleLogo.jpg",
+  //     company: "Google",
+  //   },
+  //   {
+  //     id: 4,
+  //     role: "Full Stack Web Developer",
+  //     job_description: "Develop and maintain web applications...",
+  //     skills_required: ["React", "Node.js", "MongoDB"],
+  //     experience_level: "Senior Level",
+  //     compensation: "$300/hr",
+  //     project_duration: "Contract",
+  //     application_deadline: new Date("2024-09-20"),
+  //     location_requirements: "Remote",
+  //     contact_information: "careers@company.com",
+  //     company_description: "Innovating the future...",
+  //     Applicants: ["Alice Johnson"],
+  //     bgColor: "bg-blue-100",
+  //     logo: "../../assets/GoogleLogo.jpg",
+  //     company: "Google",
+  //   },
+  //   {
+  //     id: 5,
+  //     role: "Full Stack Web Developer",
+  //     job_description: "Develop and maintain web applications...",
+  //     skills_required: ["React", "Node.js", "MongoDB"],
+  //     experience_level: "Senior Level",
+  //     compensation: "$300/hr",
+  //     project_duration: "Contract",
+  //     application_deadline: new Date("2024-09-20"),
+  //     location_requirements: "Remote",
+  //     contact_information: "careers@company.com",
+  //     company_description: "Innovating the future...",
+  //     Applicants: ["Alice Johnson"],
+  //     bgColor: "bg-pink-100",
+  //     logo: "../../assets/GoogleLogo.jpg",
+  //     company: "Google",
+  //   },
+  //   {
+  //     id: 6,
+  //     role: "Full Stack Web Developer",
+  //     job_description: "Develop and maintain web applications...",
+  //     skills_required: ["React", "Node.js", "MongoDB"],
+  //     experience_level: "Senior Level",
+  //     compensation: "$300/hr",
+  //     project_duration: "Contract",
+  //     application_deadline: new Date("2024-09-20"),
+  //     location_requirements: "Remote",
+  //     contact_information: "careers@company.com",
+  //     company_description: "Innovating the future...",
+  //     Applicants: ["Alice Johnson"],
+  //     bgColor: "bg-gray-200",
+  //     logo: "../../assets/GoogleLogo.jpg",
+  //     company: "Google",
+  //   },
+  // ];
+
+  const filteredJobs = jobs.filter((job) => {
+    const searchTerm = search.toLowerCase();
+    const matchesSearch =
+      searchTerm === "" ||
+      job.role.toLowerCase().includes(searchTerm) ||
+      job.company.toLowerCase().includes(searchTerm) ||
+      job.location_requirements.toLowerCase().includes(searchTerm);
+
+    const matchesWorkingSchedule =
+      workingSchedule.length === 0 ||
+      workingSchedule.includes(job.project_duration);
+
+    const matchesEmploymentType =
+      employmentType.length === 0 ||
+      employmentType.includes(job.location_requirements);
+
+    return matchesSearch && matchesWorkingSchedule && matchesEmploymentType;
+  });
 
   return (
     <>
-    <div className='text-black h-fit bg-white pb-20'>
-        <header className='flex space-x-2 justify-between mx-4 text-white'>
-            <button className='flex items-center bg-black p-3 rounded-xl'>
-                <FaSearch className='mr-5'/> Designer
-            </button>
-            <button className='flex items-center bg-black p-3 rounded-xl'>
-            <IoLocationSharp className='mr-5' />
-            Work Location
-            </button>
-            <button className='flex items-center bg-black p-3 rounded-xl'>
-            <PiBagFill className='mr-5' />
-            Experience
-            </button>
-            <button className='flex items-center bg-black p-3 rounded-xl'>
-            <MdCalendarMonth className='mr-5' />
-            Per month
-            </button>
-            <p className='flex items-center text-black'>
-                Salary range
-            </p>
-        </header>
+      <div className='text-black h-fit bg-white pb-20'>
         {/* Left Part */}
         <div className='flex h-fit items-center'>
-            <div className='w-1/3'>
-                {/* Image */}
-                <div className='text-left ml-6'>
-                    <p className='text-xl font-semibold'>Filters</p>
-                    <div className='flex flex-col space-y-2 mt-4'>
-                        <p className='text-gray-400'>Working Schedule</p>
-                        <span>
+          <div className='w-1/3'>
+            {/* Filters Section */}
+            <div className='text-left ml-6'>
+              <p className='text-xl font-semibold'>Filters</p>
+              <div className='flex flex-col space-y-2 mt-4'>
+                <p className='text-gray-400'>Working Schedule</p>
+                <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Full time"
+                    value="Short Term"
                     onChange={handleWorkingScheduleChange}
                   />
-                  Full time
+                  Short Term
                 </span>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Part time"
+                    value="Long Term"
                     onChange={handleWorkingScheduleChange}
                   />
-                  Part time
+                  Long Term
                 </span>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Internship"
+                    value="Contract"
                     onChange={handleWorkingScheduleChange}
                   />
-                  Internship
+                  Contract
                 </span>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Project Work"
+                    value="Permanent"
                     onChange={handleWorkingScheduleChange}
                   />
-                  Project Work
+                  Permanent
                 </span>
+              </div>
+              <div className="flex flex-col space-y-2">
+                <p className="text-gray-400 mt-4">Location Requirements</p>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Volunteering"
-                    onChange={handleWorkingScheduleChange}
-                  />
-                  Volunteering
-                </span>
-                    </div>
-                    <div className="flex flex-col space-y-2">
-                <p className="text-gray-400 mt-4">Employment Type</p>
-                <span>
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    value="Full day"
+                    value="Remote"
                     onChange={handleEmploymentTypeChange}
                   />
-                  Full day
+                  Remote
                 </span>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Flexible Schedule"
+                    value="On-site"
                     onChange={handleEmploymentTypeChange}
                   />
-                  Flexible Schedule
+                  On-site
                 </span>
                 <span>
                   <input
                     className="mr-2"
                     type="checkbox"
-                    value="Shift work"
+                    value="Hybrid"
                     onChange={handleEmploymentTypeChange}
                   />
-                  Shift work
-                </span>
-                <span>
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    value="Distant Work"
-                    onChange={handleEmploymentTypeChange}
-                  />
-                  Distant Work
-                </span>
-                <span>
-                  <input
-                    className="mr-2"
-                    type="checkbox"
-                    value="Shift method"
-                    onChange={handleEmploymentTypeChange}
-                  />
-                  Shift method
+                  Hybrid
                 </span>
               </div>
             </div>
           </div>
-            {/* Right Part */}
-            <div className="mt-4 pb-10">
+
+          {/* Right Part - Display Jobs */}
+          <div className="mt-4 pb-10">
             <div className="flex justify-between">
               <input
                 onChange={(e) => setSearch(e.target.value)}
@@ -249,10 +242,6 @@ function JobList() {
                 name="text"
                 type="text"
               />
-
-              <span className="flex">
-                Sort by : Last Updated <IoFilterSharp className="mx-3" />
-              </span>
             </div>
 
             <div className="grid grid-cols-3 gap-16 my-4 h-screen">
@@ -264,7 +253,7 @@ function JobList() {
                   <div className={`${job.bgColor} m-2 rounded-lg h-fit`}>
                     <span className="flex justify-between items-center pt-2 mr-2">
                       <p className="bg-white w-24 text-xs p-2 rounded-full ml-4">
-                        {job.datePosted}
+                        {job.application_deadline.toDateString()}
                       </p>
                       <HiOutlineBookmark className="w-10 h-10 p-2 rounded-full bg-white" />
                     </span>
@@ -273,25 +262,25 @@ function JobList() {
                     </p>
                     <span>
                       <p className="text-lg font-semibold text-left ml-3 w-40">
-                        {job.title}
+                        {job.role}
                       </p>
                       <img src={job.logo} alt={`${job.company} logo`} />
                     </span>
                     <span className="flex flex-wrap mt-4 mb-2 pb-1 pl-2 text-center ">
-                      {job.employmentTypes.map((type, index) => (
+                      {job.skills_required.map((skill, index) => (
                         <p
                           key={index}
-                          className="w-16 text-xs mr-2 flex items-center p-1 mb-2 rounded-full border-2 border-black "
+                          className="w-20 text-xs mr-2 flex justify-center items-center p-1 mb-2 rounded-full border-2 border-black "
                         >
-                          {type}
+                          {skill}
                         </p>
                       ))}
                     </span>
                   </div>
                   <div className="flex justify-between my-3">
                     <span className="text-left ml-3">
-                      <p className="font-bold">{job.salary}</p>
-                      <p className="text-gray-500">{job.location}</p>
+                      <p className="font-bold">{job.compensation}</p>
+                      <p className="text-gray-500">{job.location_requirements}</p>
                     </span>
                     <button className="bg-black text-white rounded-full p-2">
                       Details
@@ -307,4 +296,4 @@ function JobList() {
   );
 }
 
-export default JobList
+export default JobList;

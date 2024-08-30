@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import styles from './UpdateProfile.module.css';
+import styles from './createProfile.module.css';
 
-const UpdateUserProfile = () => {
+const createProfile = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [skills, setSkills] = useState('');
@@ -106,13 +106,13 @@ const UpdateUserProfile = () => {
         </form>
       </section>
       <section className={styles['profile-image-container']}>
-        <h1 style={{ fontFamily: 'monospace' }} className={styles['font-bold h-auto text-3xl self-center text-black py-10']}>
+        <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
           "Little things make big days"
         </h1>
-        <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />
+        <img className={styles['object-contain']} src="/3714960.jpg" alt="Decorative" />
       </section>
     </main>
   );
 };
 
-export default UpdateUserProfile;
+export default createProfile;
