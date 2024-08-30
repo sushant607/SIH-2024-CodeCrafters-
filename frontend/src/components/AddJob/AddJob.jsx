@@ -3,6 +3,7 @@ import "./AddJob.css";
 import axios from "axios";
 
 const AddJob = () => {
+  const token = localStorage.getItem("token");
   const [data, setData] = useState({
     role: "",
     job_description: "",
@@ -43,11 +44,17 @@ const AddJob = () => {
       setError("Please enter the Location Requirements");
       return;
     }
+    data.skills_required = data.skills_required.split(",");
     console.log(data);
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/v1/create_job",
-        { ...data }
+        "http://localhost:4000/api/v1/jobs/create_job",
+        { ...data },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log("done!");
       console.log(response.data);
