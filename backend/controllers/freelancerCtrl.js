@@ -1,6 +1,6 @@
 import { user } from "../models/user.js";
 import { Freelancer } from "../models/freelancer.js";
-
+import UploadOnCloudinary from "../util/upload.js";
 // Create Freelancer
 const applyFreelancerController = async (req, res) => {
     try {
@@ -48,25 +48,26 @@ const FreelancerInfoController = async (req, res) => {
   };
   
 // Update Proflie
-  const updateProfileController = async (req, res) => {
-    try {
-      const freelancer = await Freelancer.findOneAndUpdate(
-        { userId: req.body.userId },
-        req.body
-      );
-      res.status(201).send({
-        success: true,
-        message: "Freelancer Profile Updated"
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
-        success: false,
-        message: "Freelancer Profile Update issue",
-        error,
-      });
-    }
-  };
+const updateProfileController = async (req, res) => {
+  try {
+    const freelancer = await Freelancer.findOneAndUpdate(
+      { userId: req.body.userId },
+      req.body
+    );
+    res.status(201).send({
+      success: true,
+      message: "Freelancer Profile Updated"
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Freelancer Profile Update issue",
+      error,
+    });
+  }
+};
+  
    const uploadImageController=async (req, res) => {
   try {
     const file = req.file;
