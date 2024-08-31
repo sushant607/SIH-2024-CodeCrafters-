@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styles from './createProfile.module.css';
-import axios from 'axios'
-import { Link } from 'react-router-dom';
 
-const UpdateProfile = () => {
+const CreateProfile = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [about, setAbout] = useState('');
@@ -18,32 +16,16 @@ const UpdateProfile = () => {
   const handlePhotoChange = (e) => {
     setPhoto(URL.createObjectURL(e.target.files[0]));
   };
-  const token=localStorage.getItem('token');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Profile updated successfully!');
-    const formData ={
-      "name":userName,
-      "email":email,
-      "skills":skills,
-      "resume":resume,
-      "photo":photo
-    }
-    console.log(formData)
-    const response = axios.post(
-      'http://localhost:4000/api/v1/freelancer/profile',formData,
-      {
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
     console.log({
-      "name":userName,
-      "email":email,
-      "skills":skills,
-      "resume":resume,
-      "photo":photo
+      userName,
+      email,
+      skills,
+      resume,
+      photo,
     });
   };
 
@@ -87,17 +69,6 @@ const UpdateProfile = () => {
             />
           </div>
 
-          <div className={styles["form-group"]}>
-            <label htmlFor="skills">About:</label>
-            <textarea
-              id="about"
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-              placeholder="About yourself"
-              className={styles["brutalist-input"]}
-            />
-          </div>
-
           <div className={styles['form-group']}>
             <label htmlFor="skills">Skills:</label>
             <textarea
@@ -105,6 +76,16 @@ const UpdateProfile = () => {
               value={skills}
               onChange={(e) => setSkills(e.target.value)}
               placeholder="Enter Skills"
+              className={styles['brutalist-input']}
+            />
+          </div>
+          <div className={styles['form-group']}>
+            <label htmlFor="about">About:</label> {/* New "About" field */}
+            <textarea
+              id="about"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              placeholder="Enter something about yourself"
               className={styles['brutalist-input']}
             />
           </div>
@@ -131,22 +112,18 @@ const UpdateProfile = () => {
             />
             {photo && <img src={photo} alt="Profile" className={styles['profile-photo']} />}
           </div>
-          <div className='flex justify-between'>
-            <button type="submit" className={styles['button']}>Create Profile</button>
-            <Link to="/updateProfile">
-            <button type="submit" className={styles['button']}>Update Profile</button>
-            </Link>
-          </div>
+
+          <button type="submit" className={styles['button']}>Create Profile</button>
         </form>
       </section>
       <section className={styles['profile-image-container']}>
         <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
           "Little things make big days"
         </h1>
-        <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />
+        <img className={styles['object-contain']} src="/3714960.jpg" alt="Decorative" />
       </section>
     </main>
   );
 };
 
-export default UpdateProfile;
+export default CreateProfile;
