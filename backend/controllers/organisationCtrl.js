@@ -22,7 +22,7 @@ const getAllOrgController = async (req, res) => {
   }
 };
 
-// Get a single job by ID
+// Get a single Org by ID
 const getOrgByIdController = async (req, res) => {
   try {
     const org = await Organisation.findOne({ userId: req.params.id });
@@ -74,4 +74,27 @@ const updateOrgController = async (req, res) => {
     }
   };
 
-  export { createOrganisationController, getAllOrgController, getOrgByIdController, deleteOrgController, updateOrgController };
+  // Details Org
+const OrgInfoController = async (req, res) => {
+  try {
+    console.log("UserID being queried:", req.body.userId);  // Log the userId
+    
+    const organise = await Organisation.findOne({ userId: req.body.userId });
+    
+    console.log("Organisation found:", organise);  // Log the result of the query
+    res.status(200).send({
+      success: true,
+      message: "Organisation data fetch success",
+      data: organise,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error in Fetching Details",
+    });
+  }
+};
+
+  export { createOrganisationController, getAllOrgController, getOrgByIdController, deleteOrgController, updateOrgController, OrgInfoController };

@@ -1,5 +1,5 @@
 import express from "express";
-import {  createOrganisationController, getAllOrgController, getOrgByIdController, deleteOrgController, updateOrgController } from "../controllers/organisationCtrl.js";
+import {  createOrganisationController, getAllOrgController, getOrgByIdController, deleteOrgController, updateOrgController, OrgInfoController } from "../controllers/organisationCtrl.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -19,6 +19,9 @@ router.post("/delete_id_org/:id", authMiddleware, deleteOrgController);
 
 //UPDATE_ORG || POST
 router.put("/update_id_org", authMiddleware, updateOrgController);
+
+//VIEW_Profile || GET
+router.get("/view_profile", authMiddleware, OrgInfoController);
 
 
 export { router };
