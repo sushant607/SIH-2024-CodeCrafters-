@@ -25,11 +25,11 @@ const getAllOrgController = async (req, res) => {
 // Get a single job by ID
 const getOrgByIdController = async (req, res) => {
   try {
-    const org = await Organisation.findById(req.params.id); 
+    const org = await Organisation.findOne({ userId: req.params.id });
     if (!org) {
       return res.status(404).json({ message: "Org not found" }); 
     }
-    res.status(200).json(job); 
+    res.status(200).json(org); 
   } catch (error) {
     res.status(500).json({ message: error.message }); 
   }

@@ -26,7 +26,7 @@ const getAllJobsController = async (req, res) => {
 // Get a single job by ID
 const getJobByIdController = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id); 
+    const job = await Job.findById(req.params.id);
     if (!job) {
       return res.status(404).json({ message: "Job not found" }); 
     }
