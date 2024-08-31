@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./UpdateProfile.module.css";
 
@@ -58,15 +58,6 @@ const UpdateProfile = () => {
     }
 
     try {
-      const response = await axios.put(
-        "http://localhost:4000/api/v1/freelancer/update_profile",
-        formData,
-        {
-          headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-    try {
       const imageGet = await imageUpload();
       console.log(imageData);
       const resumeGet = await resumeUpload();
@@ -80,7 +71,7 @@ const UpdateProfile = () => {
         resume,
         photo,
       };
-      const response = await axios.post(
+      const response = await axios.put(
         "http://localhost:4000/api/v1/freelancer/upload_profile",
         { ...myData },
         { headers: { Authorization: `Bearer ${token}` } }
