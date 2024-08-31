@@ -14,6 +14,7 @@ import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
 import CreateProfile from "./components/UserProfile/createProfile";
 import OrgPageListing from "./components/OrgPageList/OrgPageListing";
+import JobandUser from "./components/JobandUser/JobandUser";
 function App() {
   return (
     <>
@@ -33,6 +34,7 @@ function App() {
           <Route path='/createProfile' element={<CreateProfile/>} />
           <Route path='/updateprofile' element={<UpdateProfile/>} />
           <Route path='/userProfile' element={<ProfileSection />} />
+          <Route path='/jobanduser' element={<JobandUser />} />
           {/* <Route path='/orgProfile' element={<ProfileSection />} /> */}
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />

@@ -4,6 +4,7 @@ import UploadOnCloudinary from "../util/upload.js";
 // Create Freelancer
 const applyFreelancerController = async (req, res) => {
     try {
+      console.log("hello boi",req.body)
       const newAccData = { ...req.body };
       const newfreelancer = await  Freelancer.create(newAccData); 
 

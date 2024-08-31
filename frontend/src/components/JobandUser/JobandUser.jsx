@@ -1,67 +1,20 @@
-import React, { useState } from 'react';
-import styles from './createProfile.module.css';
-import axios from 'axios'
-const UpdateProfile = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [skills, setSkills] = useState('');
-  const [resume, setResume] = useState(null);
-  const [photo, setPhoto] = useState(null);
+import React, { useState } from "react";
 
-  const handleResumeChange = (e) => {
-    setResume(e.target.files[0]);
-  };
-
-  const handlePhotoChange = (e) => {
-    setPhoto(URL.createObjectURL(e.target.files[0]));
-  };
-  const token=localStorage.getItem('token');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Profile updated successfully!');
-    const formData ={
-      "name":userName,
-      "email":email,
-      "skills":skills,
-      "resume":resume,
-      "photo":photo
-    }
-    console.log(formData)
-    const response = axios.post(
-      'http://localhost:4000/api/v1/freelancer/profile',formData,
-      {
-        headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    console.log({
-      "name":userName,
-      "email":email,
-      "skills":skills,
-      "resume":resume,
-      "photo":photo
-    });
-  };
-
+const JobandUser = () => {
+    const Job={
+        "company":"Google",
+        "jobTitle":"Software Intern",
+        "jobDescription":"This is a job description for a software intern.",
+        "companyDescription":"this is the company description",
+        "image":"https://cdn.rareblocks.xyz/collection/clarity/images/hero/1/background-pattern.png"
+    }  
   return (
-    <main
-      className={styles['profile-container']}
-      style={{
-        margin: 0,
-        padding: 0,
-        fontFamily: 'Arial, sans-serif',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}
-    >
+    <div className="relative">
       <section className={`${styles['profile-form-container']} ${styles['card']}`}>
         <h1 className={styles['profile-title']}>BUILD YOUR PROFILE</h1>
         <form onSubmit={handleSubmit} className={styles['profile-form']}>
           <div className={styles['form-group']}>
-            <label htmlFor="userName">User Name:</label>
+            <label htmlFor="userName">Name:</label>
             <input
               type="text"
               id="userName"
@@ -127,8 +80,7 @@ const UpdateProfile = () => {
         </h1>
         <img className={styles['object-contain']} src="/3714960.jpg" alt="Decorative" />
       </section>
-    </main>
+    </div>
   );
 };
-
-export default UpdateProfile;
+export default JobandUser;

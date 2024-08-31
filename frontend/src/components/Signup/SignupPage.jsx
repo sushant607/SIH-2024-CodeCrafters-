@@ -113,6 +113,7 @@ function SignupPage() {
                 className={`${styles.brutalistInput} ${styles.smoothType}`}
                 value={role}
                 onChange={(e) => {
+                  console.log(e.target.value);
                   setRole(e.target.value);
                 }}
               >
