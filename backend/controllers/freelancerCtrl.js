@@ -7,7 +7,6 @@ const applyFreelancerController = async (req, res) => {
       console.log("hello boi",req.body)
       const newAccData = { ...req.body };
       const newfreelancer = await  Freelancer.create(newAccData); 
-
       const userId = req.body.userId; 
       const users = await user.findById(userId);
       if (!users) {
