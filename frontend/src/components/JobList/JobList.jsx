@@ -275,7 +275,7 @@ function JobList() {
               {filteredJobs.map((job) => (
                 <div
                   key={job._id}
-                  className="w-80 h-fit rounded-xl bg-white text-black p-1 border-2 border-black"
+                  className="w-fit h-fit rounded-xl bg-white text-black p-1 border-2 border-black"
                 >
                   <div className={`${job.bgColor} m-2 rounded-lg h-fit`}>
                     <span className="flex justify-between items-center pt-2 mr-2">

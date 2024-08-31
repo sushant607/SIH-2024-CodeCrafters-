@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import styles from './OrgProfile.module.css';
+import styles from './UpdateOrgProfile.module.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 const OrgProfile = () => {
   const [userName, setUserName] = useState('');
   const [description, setDescription] = useState('');
@@ -27,8 +26,8 @@ const OrgProfile = () => {
 
     try {
       // Send the form data to the backend API endpoint
-      const response = await axios.post(
-        'http://localhost:4000/api/v1/org/create_org',
+      const response = await axios.put(
+        'http://localhost:4000/api/v1/org/update_id_org',
         formData,
         {
           headers: {
@@ -36,11 +35,11 @@ const OrgProfile = () => {
           },
         }
       );
-      alert('Profile created successfully!');
+      alert('Profile updated successfully!');
       console.log(response.data);
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Failed to create profile.');
+      alert('Failed to update profile.');
     }
   };
 
@@ -105,13 +104,7 @@ const OrgProfile = () => {
             />
             {logo && <img src={URL.createObjectURL(logo)} alt="Profile" className={styles['profile-photo']} />}
           </div>
-
-          <div className='flex justify-between'>
-            <button type="submit" className={styles['button']}>Create Profile</button>
-            <Link to="/updateOrgProfile">
-            <button type="submit" className={styles['button']}>Update Profile</button>
-            </Link>
-          </div>
+          <button type="submit" className={styles['button']}>Update Profile</button>
         </form>
       </section>
       <section className={styles['profile-image-container']}>

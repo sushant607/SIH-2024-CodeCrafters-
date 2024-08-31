@@ -18,7 +18,7 @@ router.get("/get_id_org/:id", authMiddleware, getOrgByIdController);
 router.post("/delete_id_org/:id", authMiddleware, deleteOrgController);
 
 //UPDATE_ORG || POST
-router.post("/update_id_org/:id", authMiddleware, updateOrgController);
+router.put("/update_id_org", authMiddleware, updateOrgController);
 
 
 export { router };

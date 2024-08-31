@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './createProfile.module.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const CreateProfile = () => {
   const [userName, setUserName] = useState('');
@@ -8,25 +10,97 @@ const CreateProfile = () => {
   const [skills, setSkills] = useState('');
   const [resume, setResume] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [resumeURL, setResumeURL] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
 
+  // Function to handle resume file change
   const handleResumeChange = (e) => {
     setResume(e.target.files[0]);
   };
 
+  // Function to handle photo file change
   const handlePhotoChange = (e) => {
-    setPhoto(URL.createObjectURL(e.target.files[0]));
+    setPhoto(e.target.files[0]);
   };
 
-  const handleSubmit = (e) => {
+  // Function to upload resume
+  const resumeUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", resume);
+    try {
+      const upload = await axios.post(
+        "http://localhost:4000/api/v1/freelancer/upload_image",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return upload.data.url; // Assuming your backend returns the uploaded file URL
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
+
+  // Function to upload photo
+  const imageUpload = async () => {
+    const formData = new FormData();
+    formData.append("file", photo);
+    try {
+      const upload = await axios.post(
+        "http://localhost:4000/api/v1/freelancer/upload_image",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      return upload.data.url; // Assuming your backend returns the uploaded file URL
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
+
+  // Function to handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Profile updated successfully!');
-    console.log({
-      userName,
-      email,
-      skills,
-      resume,
-      photo,
-    });
+    try {
+      const uploadedPhotoURL = await imageUpload();
+      const uploadedResumeURL = await resumeUpload();
+      if (!uploadedPhotoURL || !uploadedResumeURL) {
+        alert('Failed to upload files. Please try again.');
+        return;
+      }
+      setPhotoURL(uploadedPhotoURL);
+      setResumeURL(uploadedResumeURL);
+
+      const formData = {
+        name: userName,
+        email,
+        about,
+        skills,
+        resume: uploadedResumeURL, // Use the uploaded resume URL
+        photo: uploadedPhotoURL,   // Use the uploaded photo URL
+      };
+
+      // Send form data to backend
+      const response = await axios.post(
+        "http://localhost:4000/api/v1/freelancer/upload_profile",
+        formData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+
+      alert(response.data.message || 'Profile created successfully!');
+    } catch (error) {
+      console.error("Error creating profile:", error);
+      alert("Failed to create profile, please try again.");
+    }
   };
 
   return (
@@ -66,6 +140,17 @@ const CreateProfile = () => {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter Email"
               className={styles['brutalist-input']}
+            />
+          </div>
+
+          <div className={styles["form-group"]}>
+            <label htmlFor="about">About:</label>
+            <textarea
+              id="about"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              placeholder="About yourself"
+              className={styles["brutalist-input"]}
             />
           </div>
 
@@ -110,10 +195,15 @@ const CreateProfile = () => {
               onChange={handlePhotoChange}
               className={styles['brutalist-input']}
             />
-            {photo && <img src={photo} alt="Profile" className={styles['profile-photo']} />}
+            {photo && <img src={photoURL} alt="Profile" className={styles['profile-photo']} />}
           </div>
 
-          <button type="submit" className={styles['button']}>Create Profile</button>
+          <div className='flex justify-between'>
+            <button type="submit" className={styles['button']}>Create Profile</button>
+            <Link to="/updateProfile">
+              <button type="button" className={styles['button']}>Update Profile</button>
+            </Link>
+          </div>
         </form>
       </section>
       <section className={styles['profile-image-container']}>

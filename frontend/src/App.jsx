@@ -8,7 +8,8 @@ import ProfileSection from "./components/ViewProfile/Profile";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
-import UpdateOrgProfile from "./components/OrgProfile/OrgProfile";
+import OrgProfile from "./components/OrgProfile/OrgProfile";
+import UpdateOrgProfile from "./components/UpdateOrgProfile/UpdateOrgProfile";
 import JobList from "./components/JobList/JobList";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
@@ -34,7 +35,7 @@ function App() {
           <Route path='/createProfile' element={<CreateProfile/>} />
           <Route path='/updateProfile' element={<UpdateProfile/>} />
           <Route path='/userProfile' element={<ProfileSection />} />
-          <Route path='/orgProfile' element={<UpdateOrgProfile />} />
+          <Route path='/orgProfile' element={<OrgProfile />} />
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />
           <Route path='/addjob' element={<AddJob/>} />

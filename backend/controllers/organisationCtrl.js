@@ -57,7 +57,7 @@ const deleteOrgController = async (req, res) => {
 const updateOrgController = async (req, res) => {
     try {
       const org = await Organisation.findOneAndUpdate(
-        { _id: req.params.id },  
+        { userId: req.body.userId },  
         req.body,          
       );
       res.status(201).send({
