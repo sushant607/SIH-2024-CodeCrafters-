@@ -6,13 +6,21 @@ function JobList() {
   const [workingSchedule, setWorkingSchedule] = useState([]);
   const [employmentType, setEmploymentType] = useState([]);
   const [jobs, setJobs] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:4000/api/v1/jobs/get_all_job')
-      .then(response => setJobs(response.data))
-      .catch(error => console.error('Error fetching jobs:', error));
-  }, []);
-
+  const token = localStorage.getItem('token');
+  useEffect(()=>{
+    const func = async () => {
+        const res = await axios.get("http://localhost:4000/api/v1/jobs/get_all_job", {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        setJobs(res.data);
+        // .then(response => setJobs(response.data))
+        // .catch(error => console.error('Error fetching jobs:', error));
+    }
+    func();
+  },[]);
+  
   const handleWorkingScheduleChange = (e) => {
     const { value, checked } = e.target;
     setWorkingSchedule((prev) =>
@@ -26,7 +34,7 @@ function JobList() {
       checked ? [...prev, value] : prev.filter((item) => item !== value)
     );
   };
-
+  
   // const jobs = [
   //   {
   //     id: 1,
@@ -131,13 +139,32 @@ function JobList() {
   //     company: "Google",
   //   },
   // ];
-
+  function formatDate(isoString) {
+    // Convert to Date object
+    const dateObj = new Date(isoString);
+  
+    // Check if the date is valid
+    if (isNaN(dateObj.getTime())) {
+      return "Invalid date";
+    }
+  
+    // Format the date to a readable string
+    return dateObj.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',  // Full month name (e.g., "September")
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: true  // 12-hour clock format
+    });
+  }
   const filteredJobs = jobs.filter((job) => {
     const searchTerm = search.toLowerCase();
     const matchesSearch =
       searchTerm === "" ||
       job.role.toLowerCase().includes(searchTerm) ||
-      job.company.toLowerCase().includes(searchTerm) ||
+      // job.company.toLowerCase().includes(searchTerm) ||
       job.location_requirements.toLowerCase().includes(searchTerm);
 
     const matchesWorkingSchedule =
@@ -247,21 +274,22 @@ function JobList() {
             <div className="grid grid-cols-3 gap-16 my-4 h-screen">
               {filteredJobs.map((job) => (
                 <div
-                  key={job.id}
-                  className="w-64 h-fit rounded-xl bg-white text-black p-1 border-2 border-black"
+                  key={job._id}
+                  className="w-80 h-fit rounded-xl bg-white text-black p-1 border-2 border-black"
                 >
                   <div className={`${job.bgColor} m-2 rounded-lg h-fit`}>
                     <span className="flex justify-between items-center pt-2 mr-2">
-                      <p className="bg-white w-24 text-xs p-2 rounded-full ml-4">
-                        {job.application_deadline.toDateString()}
-                      </p>
+                    <p className="bg-white w-24 text-xs p-2 rounded-full ml-4">
+  {formatDate(job.application_deadline)}
+</p>
+
                       <HiOutlineBookmark className="w-10 h-10 p-2 rounded-full bg-white" />
                     </span>
                     <p className="font-bold mt-5 text-left ml-3 text-xs">
                       {job.company}
                     </p>
                     <span>
-                      <p className="text-lg font-semibold text-left ml-3 w-40">
+                      <p className="text-lg font-semibold text-left ml-3">
                         {job.role}
                       </p>
                       <img src={job.logo} alt={`${job.company} logo`} />
@@ -282,7 +310,7 @@ function JobList() {
                       <p className="font-bold">{job.compensation}</p>
                       <p className="text-gray-500">{job.location_requirements}</p>
                     </span>
-                    <button className="bg-black text-white rounded-full p-2">
+                    <button className="bg-black text-white rounded-full w-20 p-1">
                       Details
                     </button>
                   </div>

@@ -12,7 +12,7 @@ router.post("/profile", authMiddleware, applyFreelancerController);
 router.get("/view_profile", authMiddleware, FreelancerInfoController);
 
 //Update_Profile || GET
-router.post("/update_profile", authMiddleware, updateProfileController);
+router.put("/update_profile", authMiddleware, updateProfileController);
 
 //Upload_Image
 router.post("/upload_image", upload.single("file"), authMiddleware,uploadImageController)

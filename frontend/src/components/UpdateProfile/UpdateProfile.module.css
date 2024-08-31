@@ -12,10 +12,9 @@
 
 .profile-container {
     display: flex;
-    margin-top: 100px;
     justify-content: space-between; /* Distribute space between items */
     align-items: flex-start; /* Align items to the top */
-    height: 100vh; /* Full viewport height */
+    height: 100%; /* Full viewport height */
     background-color: white;
     width: 100%; /* Ensure it takes full width */
     padding: 20px; /* Add padding for spacing */
@@ -34,11 +33,13 @@
   }
   .object-fill
   {
-    height: 400px;
+    height: 600px;
     width: 600px;
   }
   .profile-form-container {
     flex: 1; /* Make it flexible to occupy space */
+    margin-top: 20px;
+    margin-bottom: 50px;
     max-width: 400px; /* Limit the maximum width of the form container */
     padding: 15px;
     border: 1px solid black;
