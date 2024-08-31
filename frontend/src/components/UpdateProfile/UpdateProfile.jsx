@@ -9,10 +9,11 @@ const UpdateProfile = () => {
   const [photo, setPhoto] = useState(null);
   const token = localStorage.getItem("token");
 
-  let imageData, resumeData;
+  const [imageData, setImageData] = useState(null);
+  const [resumeData, setResumeData] = useState(null);
 
   useEffect(() => {
-    if (imageData && resumeData) {
+    if (imageData && resumeData && imageData.photo && resumeData.photo) {
       setResume(resumeData.photo);
       setPhoto(imageData.photo);
     }
@@ -32,7 +33,7 @@ const UpdateProfile = () => {
     try {
       const upload = await axios.post(
         "http://localhost:4000/api/v1/freelancer/upload_image",
-        { ...formData },
+        formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return upload.data;
@@ -48,7 +49,7 @@ const UpdateProfile = () => {
     try {
       const upload = await axios.post(
         "http://localhost:4000/api/v1/freelancer/upload_image",
-        { ...formData },
+        formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return upload.data;
@@ -61,10 +62,12 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      imageData = await imageUpload();
+      const imageGet = await imageUpload();
       console.log(imageData);
-      resumeData = await resumeUpload();
+      const resumeGet = await resumeUpload();
       console.log(resumeData);
+      setImageData(imageGet);
+      setResumeData(resumeGet);
       const myData = {
         userName,
         email,
@@ -161,7 +164,7 @@ const UpdateProfile = () => {
             />
             {photo && (
               <img
-                src={photo}
+                src={URL.createObjectURL(photo)}
                 alt='Profile'
                 className={styles["profile-photo"]}
               />
