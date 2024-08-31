@@ -17,6 +17,7 @@ import CreateProfile from "./components/UserProfile/createProfile";
 import OrgPageListing from "./components/OrgPageList/OrgPageListing";
 import JobandUser from "./components/JobandUser/JobandUser";
 import OrgProfileSection from "./components/ViewOrgProfile/ViewOrgProfile";
+import Features from "./components/Features/Features";
 function App() {
   return (
     <>
@@ -25,8 +26,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/userhome' element={<Home />} />
-          <Route path='/orghome' element={<Home />} />
+          <Route path='/features' element={<Features />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/job' element={<JobPage />} />
           <Route path='/updateOrgProfile' element={<UpdateOrgProfile />} />
