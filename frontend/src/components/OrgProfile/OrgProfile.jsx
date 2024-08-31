@@ -94,7 +94,7 @@ const UpdateOrgProfile = () => {
         </form>
       </section>
       <section className={styles['profile-image-container']}>
-        <h1 style={{ fontFamily: 'monospace' }} className={styles['font-bold h-auto text-3xl self-center text-black py-10']}>
+        <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
         "Empowering your mission with the right tools"
         </h1>
         <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />

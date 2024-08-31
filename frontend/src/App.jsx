@@ -32,10 +32,9 @@ function App() {
           <Route path='/orgJobList' element={<OrgPageListing />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/createProfile' element={<CreateProfile/>} />
-          <Route path='/updateprofile' element={<UpdateProfile/>} />
+          <Route path='/updateProfile' element={<UpdateProfile/>} />
           <Route path='/userProfile' element={<ProfileSection />} />
-          <Route path='/jobanduser' element={<JobandUser />} />
-          {/* <Route path='/orgProfile' element={<ProfileSection />} /> */}
+          <Route path='/orgProfile' element={<UpdateOrgProfile />} />
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />
           <Route path='/addjob' element={<AddJob/>} />

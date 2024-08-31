@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styles from './createProfile.module.css';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+
 const UpdateProfile = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
+  const [about, setAbout] = useState('');
   const [skills, setSkills] = useState('');
   const [resume, setResume] = useState(null);
   const [photo, setPhoto] = useState(null);
@@ -84,6 +87,17 @@ const UpdateProfile = () => {
             />
           </div>
 
+          <div className={styles["form-group"]}>
+            <label htmlFor="skills">About:</label>
+            <textarea
+              id="about"
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              placeholder="About yourself"
+              className={styles["brutalist-input"]}
+            />
+          </div>
+
           <div className={styles['form-group']}>
             <label htmlFor="skills">Skills:</label>
             <textarea
@@ -117,15 +131,19 @@ const UpdateProfile = () => {
             />
             {photo && <img src={photo} alt="Profile" className={styles['profile-photo']} />}
           </div>
-
-          <button type="submit" className={styles['button']}>Create Profile</button>
+          <div className='flex justify-between'>
+            <button type="submit" className={styles['button']}>Create Profile</button>
+            <Link to="/updateProfile">
+            <button type="submit" className={styles['button']}>Update Profile</button>
+            </Link>
+          </div>
         </form>
       </section>
       <section className={styles['profile-image-container']}>
         <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
           "Little things make big days"
         </h1>
-        <img className={styles['object-contain']} src="/3714960.jpg" alt="Decorative" />
+        <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />
       </section>
     </main>
   );
