@@ -164,16 +164,6 @@ const CreateProfile = () => {
               className={styles['brutalist-input']}
             />
           </div>
-          <div className={styles['form-group']}>
-            <label htmlFor="about">About:</label> {/* New "About" field */}
-            <textarea
-              id="about"
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-              placeholder="Enter something about yourself"
-              className={styles['brutalist-input']}
-            />
-          </div>
 
           <div className={styles['form-group']}>
             <label htmlFor="resume">Upload Resume (PDF):</label>
@@ -210,7 +200,7 @@ const CreateProfile = () => {
         <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
           "Little things make big days"
         </h1>
-        <img className={styles['object-contain']} src="/3714960.jpg" alt="Decorative" />
+        <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />
       </section>
     </main>
   );
