@@ -29,9 +29,9 @@
 }
 
 .profileImage img {
-  width: 140%; /* Ensure image fills container */
-  height: 140%; /* Ensure image fills container */
-  object-fit: cover; /* Maintain aspect ratio and cover container */
+  width: 100%; /* Ensure image fills container */
+  height: 100%; /* Ensure image fills container */
+  object-fit: contain; /* Maintain aspect ratio and cover container */
 }
 
 .profileDetails h2 {

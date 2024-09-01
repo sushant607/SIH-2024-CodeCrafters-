@@ -1,31 +1,50 @@
 import cloudinary from 'cloudinary';
-import fs from 'fs';
+import fs from 'fs/promises'; // Use promises version for async/await
 import dotenv from 'dotenv';
 
 const { v2: cloudinaryV2 } = cloudinary;
 
 dotenv.config();
 
-cloudinary.config({ 
-  cloud_name:process.env.CLOUD_NAME, 
-  api_key: process.env.API_KEY, 
-  api_secret:process.env.API_SECRET,
+cloudinaryV2.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
-const UploadOnCloudinary=async(localfilePath)=>{
-  try{
-    if(!localfilePath) return null
-    const response=await cloudinary.uploader.upload(localfilePath,{resource_type:"auto"})
-    //File is uploaded successfully
-    console.log("File has been uploaded Successfully",response.url);
-    return response
+// Utility function to delete the local file
+const deleteLocalFile = async (filePath) => {
+  try {
+    await fs.unlink(filePath);
+    console.log(`Successfully deleted local file: ${filePath}`);
+  } catch (error) {
+    console.error(`Error deleting local file: ${filePath}`, error);
+  }
+};
 
-}
-catch(err){
-    fs.unlinkSync(localfilePath)//remove the temporary locally stored file 
-    console.log(err);
-    return null
-}
-}
+const uploadOnCloudinary = async (localFilePath) => {
+  try {
+    if (!localFilePath) {
+      console.error('No file path provided for upload.');
+      return null;
+    }
 
-export default UploadOnCloudinary
+    // Upload to Cloudinary
+    const response = await cloudinaryV2.uploader.upload(localFilePath, { resource_type: 'auto' });
+
+    // Log success and delete the local file
+    console.log('File has been uploaded successfully:', response.secure_url);
+    await deleteLocalFile(localFilePath); // Clean up local file after upload
+    return response;
+  } catch (err) {
+    console.error('Error uploading to Cloudinary:', err.message);
+    
+    // Attempt to delete the local file even if an error occurs
+    if (localFilePath) {
+      await deleteLocalFile(localFilePath);
+    }
+    return null;
+  }
+};
+
+export default uploadOnCloudinary;

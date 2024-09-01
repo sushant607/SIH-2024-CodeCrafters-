@@ -2,45 +2,82 @@ import React, { useState } from 'react';
 import styles from './OrgProfile.module.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 const OrgProfile = () => {
   const [userName, setUserName] = useState('');
   const [description, setDescription] = useState('');
   const [roles, setRoles] = useState('');
   const [logo, setLogo] = useState(null);
+  const [logoURL, setLogoURL] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // State to hold error message
 
   // Handle the change for logo file input
   const handleLogoChange = (e) => {
     setLogo(e.target.files[0]);
   };
 
+  const logoUpload = async () => {
+    if (!logo) return null;
+
+    const formData = new FormData();
+    formData.append('file', logo);
+    try {
+      const upload = await axios.post(
+        'http://localhost:4000/api/v1/org/upload_logo',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('Photo upload response:', upload);
+      return upload.data.logoURL;
+    } catch (e) {
+      console.error('Error during photo upload:', e);
+      return null;
+    }
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Create a FormData object to send form data including files
-    const formData ={
-      "name":userName,
-      "description":description,
-      "roles":roles,
-      "logo":logo,
-    }
+    setErrorMessage(''); // Reset error message before each submit
 
     try {
-      // Send the form data to the backend API endpoint
+      const uploadedLogoURL = await logoUpload();
+      console.log('Uploaded Logo URL:', uploadedLogoURL);
+      setLogoURL(uploadedLogoURL);
+      
+      const formData = {
+        name: userName,
+        description: description,
+        roles: roles,
+        logo: uploadedLogoURL, // Use the uploaded logo URL
+      };
+
       const response = await axios.post(
         'http://localhost:4000/api/v1/org/create_org',
         formData,
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
           },
         }
       );
+
       alert('Profile created successfully!');
       console.log(response.data);
     } catch (error) {
-      console.error('Error updating profile:', error);
-      alert('Failed to create profile.');
+      if (error.response && error.response.status === 400) {
+        // Display specific error message from the backend
+        setErrorMessage(error.response.data.message || 'Failed to create profile.');
+      } else {
+        setErrorMessage('An unexpected error occurred while creating the profile.');
+      }
+      console.error('Error creating profile:', error);
     }
   };
 
@@ -60,6 +97,8 @@ const OrgProfile = () => {
       <section className={`${styles['profile-form-container']} ${styles['card']}`}>
         <h1 className={styles['profile-title']}>CREATE ORGANIZATION PROFILE</h1>
         <form onSubmit={handleSubmit} className={styles['profile-form']}>
+          {errorMessage && <p className="text-red-500 my-2 text-bold">{errorMessage}</p>} {/* Display error message */}
+          
           <div className={styles['form-group']}>
             <label htmlFor="userName">Organization Name:</label>
             <input
@@ -103,19 +142,23 @@ const OrgProfile = () => {
               onChange={handleLogoChange}
               className={styles['brutalist-input']}
             />
-            {logo && <img src={URL.createObjectURL(logo)} alt="Profile" className={styles['profile-photo']} />}
+            {logoURL && <img src={logoURL} alt="Profile" className={styles['profile-photo']} />}
           </div>
 
-          <div className='flex justify-between'>
+          <div className="flex justify-between">
             <button type="submit" className={styles['button']}>Create Profile</button>
             <Link to="/updateOrgProfile">
-            <button type="submit" className={styles['button']}>Update Profile</button>
+              <button type="button" className={styles['button']}>Update Profile</button>
             </Link>
           </div>
         </form>
       </section>
+
       <section className={styles['profile-image-container']}>
-        <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
+        <h1
+          style={{ fontFamily: 'monospace' }}
+          className="font-bold h-auto text-2xl self-center text-black py-10"
+        >
           "Empowering your mission with the right tools"
         </h1>
         <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />

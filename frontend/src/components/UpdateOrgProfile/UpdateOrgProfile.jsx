@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styles from './UpdateOrgProfile.module.css';
 import axios from 'axios';
 const OrgProfile = () => {
@@ -7,39 +7,91 @@ const OrgProfile = () => {
   const [roles, setRoles] = useState('');
   const [logo, setLogo] = useState(null);
 
+  useEffect(() => {
+    const fetchOrgData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/org/view_profile",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const {name,description,roles,logo} = response.data;
+        setUserName(name);
+        setDescription(description);
+        setRoles(roles);
+        setLogo(logo);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        setError("Failed to fetch profile data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrgData();
+  }, []);
+  
   // Handle the change for logo file input
   const handleLogoChange = (e) => {
     setLogo(e.target.files[0]);
+  };
+
+  const logoUpload = async () => {
+    if (!logo) return null;
+
+    const formData = new FormData();
+    formData.append("file", logo);
+    try {
+      const upload = await axios.post(
+        'http://localhost:4000/api/v1/org/create_org',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('Logo upload response:', upload);
+      return upload.data.logoURL;
+    } catch (e) {
+      console.error('Error during logo upload:', e);
+      return null;
+    }
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create a FormData object to send form data including files
-    const formData ={
-      "name":userName,
-      "description":description,
-      "roles":roles,
-      "logo":logo,
-    }
-
     try {
-      // Send the form data to the backend API endpoint
-      const response = await axios.put(
-        'http://localhost:4000/api/v1/org/update_id_org',
+      const uploadedLogoURL = await logoUpload();
+      console.log('Uploaded Logo URL:', uploadedLogoURL);
+      setLogoURL(uploadedLogoURL);
+      const formData ={
+        "name":userName,
+        "description":description,
+        "roles":roles,
+        "logo":logoURL,
+      }
+      const response = await axios.post(
+        'http://localhost:4000/api/v1/org/create_org',
         formData,
         {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
           },
         }
       );
-      alert('Profile updated successfully!');
+      alert('Profile created successfully!');
       console.log(response.data);
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Failed to update profile.');
+      alert('Failed to create profile.');
     }
   };
 
