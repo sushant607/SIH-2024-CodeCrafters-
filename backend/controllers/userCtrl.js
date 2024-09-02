@@ -1,6 +1,7 @@
 import bcrypt  from 'bcrypt';
 import  jwt from 'jsonwebtoken' ;
 import { user } from "../models/user.js";
+import validator from 'validator';
 
 const loginController = async (req, res) => {
     try {
@@ -8,13 +9,13 @@ const loginController = async (req, res) => {
         const existingUser = await user.findOne({ username: req.body.username });
         if (!user) {
           return res
-            .status(200)
+            .status(400)
             .send({ message: "user not found", success: false });
         }
         const isMatch = await bcrypt.compare(req.body.password, existingUser.password);
         if (!isMatch) {
           return res
-            .status(200)
+            .status(400)
             .send({ message: "Invalid username or Password", success: false });
         }
         const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, { expiresIn: "1d",  });
@@ -35,9 +36,23 @@ const registerController = async (req, res) => {
         const exisitingUser = await user.findOne({ username: req.body.username });
         if (exisitingUser) {
           return res
-            .status(200)
-            .send({ message: "User Already Exist", success: false });
+            .status(400)
+            .send({ message: "Username Already Exist", success: false });
         }
+        if (!validator.isEmail(req.body.email)) {
+          return res.status(400).send({ message: "Invalid email format", success: false });
+        }
+
+        if (!validator.isStrongPassword(req.body.password)) {
+          return res.status(400).send({ 
+              message: "Password must contain at least 8 characters, including 1 uppercase, 1 lowercase, 1 number, and 1 symbol", 
+              success: false 
+          });
+        }
+      const existingEmail = await user.findOne({ email : req.body.email });
+      if (existingEmail) {
+          return res.status(400).send({ message: "Email already in use", success: false });
+      }
         // Hash the password
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Profile.module.css"; // Assuming you're using CSS Modules
-import defaultProfileImage from "./Profile-Image.png";
+import { Link } from "react-router-dom";
+import defaultProfile from "./Profile-Image.png";
 const ProfileSection = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,22 +34,24 @@ const ProfileSection = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const { name, email, skills, about } = userData;
-
+  const { name, email, skills, about, photo } = userData;
   return (
     <div className={styles.profileContainer}>
       <div className={styles.profileCard}>
         <div className={styles.profileImage}>
-          <img src={defaultProfileImage} alt="" />
+          {photo ? <img src={photo}/> : <img src={defaultProfile}/> }
         </div>
         <div className={styles.profileDetails}>
           <h2>{name}</h2>
-          <p>Email: {email}</p>
           <div className={styles.profileInfo}>
             {/* <div className={styles.profileField}>
               <label>Location:</label>
               <p>{location}</p>
             </div> */}
+            <div className={styles.profileField}>
+              <label>Email:</label>
+              <p>{email}</p>
+            </div>
             <div className={styles.profileField}>
               <label>Skills:</label>
               <p>{skills.join(", ")}</p>
@@ -57,6 +60,9 @@ const ProfileSection = () => {
               <label>About:</label>
               <p>{about}</p>
             </div>
+            <Link to="/updateProfile">
+              <button type="button" className='bg-green-500 text-white border-none py-2 px-3 rounded cursor-pointer text-xs mt-2 self-center hover:bg-gray-700'>Update Profile</button>
+            </Link>
           </div>
         </div>
       </div>

@@ -15,37 +15,61 @@ const CreateProfile = () => {
 
   // Function to handle resume file change
   const handleResumeChange = (e) => {
-    setResume(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.size > 5 * 1024 * 1024) {
+      alert("File size should be less than 5MB.");
+      return;
+    }
+    setResume(selectedFile);
   };
 
-  // Function to handle photo file change
   const handlePhotoChange = (e) => {
-    setPhoto(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.size > 2 * 1024 * 1024) {
+      alert("Photo size should be less than 2MB.");
+      return;
+    }
+    setPhoto(selectedFile);
   };
 
   // Function to upload resume
-  const resumeUpload = async () => {
-    const formData = new FormData();
-    formData.append("file", resume);
-    try {
-      const upload = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/upload_image",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      return upload.data.url; // Assuming your backend returns the uploaded file URL
-    } catch (e) {
-      console.error(e);
+  // Function to upload resume
+const resumeUpload = async () => {
+  if (!resume) return null; // Ensure a file is selected
+
+  const formData = new FormData();
+  formData.append("file", resume);
+  try {
+    const upload = await axios.post(
+      "http://localhost:4000/api/v1/freelancer/upload_resume",
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    console.log('Resume upload response:', upload);
+
+    if (upload.data && upload.data.resumeURL) {
+      console.log('Uploaded Resume URL:', upload.data.resumeURL);
+      return upload.data.resumeURL;
+    } else {
+      console.error('Resume URL not found in response:', upload.data);
       return null;
     }
-  };
-
+  } catch (e) {
+    console.error('Error during resume upload:', e);
+    return null;
+  }
+};
+  
   // Function to upload photo
   const imageUpload = async () => {
+    if (!photo) return null;
+
     const formData = new FormData();
     formData.append("file", photo);
     try {
@@ -55,12 +79,14 @@ const CreateProfile = () => {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
-      return upload.data.url; // Assuming your backend returns the uploaded file URL
+      console.log('Photo upload response:', upload);
+      return upload.data.imageURL;
     } catch (e) {
-      console.error(e);
+      console.error('Error during photo upload:', e);
       return null;
     }
   };
@@ -71,28 +97,38 @@ const CreateProfile = () => {
     try {
       const uploadedPhotoURL = await imageUpload();
       const uploadedResumeURL = await resumeUpload();
-      if (!uploadedPhotoURL || !uploadedResumeURL) {
-        alert('Failed to upload files. Please try again.');
-        return;
-      }
+  
+      // if (!uploadedPhotoURL || !uploadedResumeURL) {
+      //   alert('Failed to upload files. Please try again.');
+      //   console.error('Upload failure details:', { uploadedPhotoURL, uploadedResumeURL });
+      //   return;
+      // }
+
+      console.log('Uploaded Photo URL:', uploadedPhotoURL);
+      console.log('Uploaded Resume URL:', uploadedResumeURL);
+
       setPhotoURL(uploadedPhotoURL);
       setResumeURL(uploadedResumeURL);
 
       const formData = {
         name: userName,
-        email,
-        about,
-        skills,
-        resume: uploadedResumeURL, // Use the uploaded resume URL
-        photo: uploadedPhotoURL,   // Use the uploaded photo URL
+        email: email,
+        about: about,
+        skills: skills,
+        resume: uploadedResumeURL,
+        photo: uploadedPhotoURL,
       };
 
-      // Send form data to backend
+      console.log('Form Data being sent:', formData);
+  
       const response = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/upload_profile",
+        "http://localhost:4000/api/v1/freelancer/profile",
         formData,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            'Content-Type': 'application/json',
+          },
         }
       );
 
@@ -101,7 +137,7 @@ const CreateProfile = () => {
       console.error("Error creating profile:", error);
       alert("Failed to create profile, please try again.");
     }
-  };
+  };  
 
   return (
     <main
@@ -174,6 +210,7 @@ const CreateProfile = () => {
               onChange={handleResumeChange}
               className={styles['brutalist-input']}
             />
+            {resumeURL && <a href={resumeURL} target="_blank" rel="noopener noreferrer">View Resume</a>}
           </div>
 
           <div className={styles['form-group']}>
@@ -185,7 +222,7 @@ const CreateProfile = () => {
               onChange={handlePhotoChange}
               className={styles['brutalist-input']}
             />
-            {photo && <img src={photoURL} alt="Profile" className={styles['profile-photo']} />}
+            {photoURL && <img src={photoURL} alt="Profile" className={styles['profile-photo']} />}
           </div>
 
           <div className='flex justify-between'>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./ViewOrgProfile.module.css";
 import defaultProfileImage from "./Profile-Image.png";
+
 const OrgProfileSection = () => {
   const [orgData, setOrgData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const OrgProfileSection = () => {
             },
           }
         );
-        setOrgData(response.data);
+        setOrgData(response.data.data || null); // If data is null, set orgData to null
       } catch (error) {
         console.error("Error fetching profile:", error);
         setError("Failed to fetch profile data");
@@ -31,23 +32,19 @@ const OrgProfileSection = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-  console.log(orgData);
-  const { name, description, roles, logo } = orgData.data;
+  if (error || !orgData) return <div>{error || "No profile data available."}</div>;
+
+  const { name, description, roles, logo } = orgData;
 
   return (
     <div className={styles.profileContainer}>
       <div className={styles.profileCard}>
         <div className={styles.profileImage}>
-          <img src={defaultProfileImage} alt={logo} />
+          {logo ? <img src={logo} alt="Organization Logo" /> : <img src={defaultProfileImage} alt="Default Profile" />}
         </div>
         <div className={styles.profileDetails}>
           <h2>{name}</h2>
           <div className={styles.profileInfo}>
-            {/* <div className={styles.profileField}>
-              <label>Location:</label>
-              <p>{location}</p>
-            </div> */}
             <div className={styles.profileField}>
               <label>Roles Offered:</label>
               <p>{roles}</p>

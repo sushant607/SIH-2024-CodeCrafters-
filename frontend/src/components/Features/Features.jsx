@@ -11,7 +11,7 @@ const Features = () => {
 
         <div className="grid grid-cols-1 mt-10 text-center sm:mt-16 sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 xl:mt-24">
             <div className="md:p-8 lg:p-14">
-            <svg width="46" height="46" viewBox="0 0 24 24" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+            <svg className="mx-auto mb-0" width="50" height="50" viewBox="0 0 24 24" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
  <g transform="translate(0 -1028.4)">
   <path d="m3 1031.4v10c0 4.2 3.6322 8 9 10 5.368-2 9-5.8 9-10v-10h-18z" fill="#95a5a6"/>
   <path d="m3 1030.4v10c0 4.2 3.6322 8 9 10 5.368-2 9-5.8 9-10v-10h-18z" fill="#ecf0f1"/>
@@ -22,7 +22,7 @@ const Features = () => {
   <path d="m16 1036.4-4.683 4.6-1.9511-1.9-1.6586 1.7 1.9512 1.9 1.5615 1.6 0.097 0.1 6.342-6.4-1.659-1.6z" fill="#ecf0f1"/>
  </g>
 </svg>
-                <TbShieldLock style={{width:"46px", height:"46px"}}className='mx-auto mb-0'/>
+                {/* <TbShieldLock style={{width:"46px", height:"46px"}}className='mx-auto mb-0'/> */}
                 <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">Escrow Payment Protection</h3>
                 <p className="mt-5 text-base text-gray-600 font-pj">Work with confidence using our secure escrow payment system that holds funds until project milestones are met, ensuring trust and satisfaction for both freelancers and clients.</p>
             </div>
