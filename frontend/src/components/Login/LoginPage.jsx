@@ -20,13 +20,12 @@ function LoginPage() {
       localStorage.setItem("userType", res.data.userType); // Store the user type received from the server
 
       console.log('Login successful');
+      alert("login successful");
       navigate("/"); // Redirect to the appropriate page (e.g., home or dashboard)
-    } else {
-      console.log('Login failed:', res.data.message);
-      // Handle error (e.g., show error message)
-    }
+    } 
   } catch (error) {
     console.log('An error occurred:', error);
+    alert(error.response.data.message || "Login failed.");
     // Handle unexpected errors (e.g., show error message)
   }
   };

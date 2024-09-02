@@ -21,13 +21,12 @@ function SignupPage() {
       });
       if (res.data.success) {
         console.log("Register Successfully!");
+        alert("Register Successfully!");
         navigate("/login");
-      } else {
-        console.log(res.data.message);
-      }
+      } 
     } catch (error) {
       console.log(error);
-      // message.error("Something Went Wrong");
+      alert(error.response.data.message || "Validation failed.");
     }
   };
   return (
