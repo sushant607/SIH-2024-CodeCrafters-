@@ -23,46 +23,46 @@ const UpdateProfile = () => {
     }
   }, [imageData, resumeData]);
 
-  const resumeUpload = async () => {
-    const formData = new FormData();
-    formData.append("file", resume);
-    try {
-      const upload = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/upload_image",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      return upload.data.url; // Assuming your backend returns the uploaded file URL
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  };
+  // const resumeUpload = async () => {
+  //   const formData = new FormData();
+  //   formData.append("file", resume);
+  //   try {
+  //     const upload = await axios.post(
+  //       "http://localhost:4000/api/v1/freelancer/upload_image",
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     return upload.data.url; // Assuming your backend returns the uploaded file URL
+  //   } catch (e) {
+  //     console.error(e);
+  //     return null;
+  //   }
+  // };
 
-  // Function to upload photo
-  const imageUpload = async () => {
-    const formData = new FormData();
-    formData.append("file", photo);
-    try {
-      const upload = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/upload_image",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      return upload.data.url; // Assuming your backend returns the uploaded file URL
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
-  };
+  // // Function to upload photo
+  // const imageUpload = async () => {
+  //   const formData = new FormData();
+  //   formData.append("file", photo);
+  //   try {
+  //     const upload = await axios.post(
+  //       "http://localhost:4000/api/v1/freelancer/upload_image",
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     return upload.data.url; // Assuming your backend returns the uploaded file URL
+  //   } catch (e) {
+  //     console.error(e);
+  //     return null;
+  //   }
+  // };
   const handleResumeChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile && selectedFile.size > 5 * 1024 * 1024) {
