@@ -16,7 +16,7 @@ const Home = () => {
           connect with skilled freelancers. Browse profiles, review portfolios,
           and hire the right talent for your projects.
         </p>
-        <NavLink to={isLoggedIn?userType==='user'?'/joblist':'/postjob':"/signup"} style={{ textDecoration: "none" }}>
+        <NavLink to={isLoggedIn?userType==='user'?'/joblist':'/addjob':"/signup"} style={{ textDecoration: "none" }}>
           {/*signup*/}
           <div className='signup-button'>
             <button className='cta'>

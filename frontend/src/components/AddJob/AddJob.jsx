@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AddJob.css";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 const AddJob = () => {
   const token = localStorage.getItem("token");
   const [data, setData] = useState({
@@ -18,7 +18,7 @@ const AddJob = () => {
   });
 
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (
@@ -58,6 +58,7 @@ const AddJob = () => {
       );
       console.log("done!");
       console.log(response.data);
+      navigate('/jobList');
     } catch (e) {
       console.log("Error occured when trying to create job listing!");
       console.error(e.message);

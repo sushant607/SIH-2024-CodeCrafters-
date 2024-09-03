@@ -18,8 +18,8 @@ const applyFreelancerController = async (req, res) => {
     }
 
     // Find the user by ID to ensure the user exists
-    const user = await user.findById(userId);
-    if (!user) {
+    const newUser = await user.findById(userId);
+    if (!newUser) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
@@ -28,7 +28,7 @@ const applyFreelancerController = async (req, res) => {
     const newFreelancer = await Freelancer.create(newAccData);
 
     // Save any necessary changes to the user (optional step if there's any association to be saved)
-    await user.save();
+    await newUser.save();
 
     res.status(201).send({
       success: true,
