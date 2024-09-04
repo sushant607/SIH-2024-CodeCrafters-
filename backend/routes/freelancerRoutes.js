@@ -1,5 +1,5 @@
 import express from "express";
-import { applyFreelancerController, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController } from "../controllers/freelancerCtrl.js";
+import { applyFreelancerController, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController,getRecommendedJobs} from "../controllers/freelancerCtrl.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import upload from '../middlewares/multer.js';
 const router = express.Router();
@@ -18,5 +18,7 @@ router.put("/update_profile", authMiddleware, updateProfileController);
 router.post("/upload_image", upload.single("file"), authMiddleware,uploadImageController)
 
 //Upload_Resume
-router.post("/upload_resume", upload.single("file"), authMiddleware,uploadResumeController)
+router.post("/upload_resume", upload.single("file"), authMiddleware,uploadResumeController);
+router.get("/recommendJobs", authMiddleware,getRecommendedJobs);
+
 export { router };
