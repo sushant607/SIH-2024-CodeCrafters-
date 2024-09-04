@@ -22,6 +22,6 @@ router.post("/upload_image", upload.single("file"), authMiddleware,uploadImageCo
 
 //Upload_Resume
 router.post("/upload_resume", upload.single("file"), authMiddleware,uploadResumeController);
-router.get("/recommendJobs", authMiddleware,recommendJobs);
+router.get("/recommendJobs", authMiddleware, getRecommendedJobs );
 
 export { router };

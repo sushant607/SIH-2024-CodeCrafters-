@@ -14,7 +14,7 @@ import JobList from "./components/JobList/JobList";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
 import CreateProfile from "./components/UserProfile/createProfile";
-import OrgPageListing from "./components/OrgPageList/OrgPageListing";
+import OrgJobList from "./components/OrgJobList/OrgJobList";
 import JobandUser from "./components/JobandUser/JobandUser";
 import OrgProfileSection from "./components/ViewOrgProfile/ViewOrgProfile";
 import Features from "./components/Features/Features";
@@ -34,7 +34,7 @@ function App() {
           <Route path="/job" element={<JobPage />} />
           <Route path="/updateOrgProfile" element={<UpdateOrgProfile />} />
           <Route path="/jobList" element={<JobList />} />
-          <Route path="/orgJobList" element={<OrgPageListing />} />
+          <Route path="/orgJobList" element={<OrgJobList />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/createProfile" element={<CreateProfile />} />
           <Route path="/updateProfile" element={<UpdateProfile />} />
