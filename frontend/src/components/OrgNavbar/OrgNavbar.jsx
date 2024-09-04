@@ -79,12 +79,9 @@ const OrgNavbar = () => {
               </Link>
             )}
 
-            <Link
-              to="/orgProfile"
-              className="text-base font-medium text-gray-900 hover:text-opacity-50"
-            >
+            {!isProfileCreated &&(<Link to="/orgProfile" className="text-base font-medium text-gray-900 hover:text-opacity-50">
               Create Profile
-            </Link>
+            </Link>)}
           </div>
 
           <div className="hidden md:flex">

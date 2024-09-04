@@ -156,14 +156,7 @@ const OrgProfile = () => {
             )}
           </div>
           <div className="flex justify-between">
-            <button type="submit" className={styles["button"]}>
-              Create Profile
-            </button>
-            <Link to="/updateOrgProfile">
-              <button type="button" className={styles["button"]}>
-                Update Profile
-              </button>
-            </Link>
+            <button type="submit" className={styles['button']}>Create Profile</button>
           </div>
         </form>
       </section>

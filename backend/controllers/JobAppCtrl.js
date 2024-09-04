@@ -17,18 +17,12 @@ const createJobApplication = async (req, res) => {
     console.log(freelancer);
 
     const freelancerId = freelancer._id;
-
-    // Create the job application
     const jobApplication = new JobApplication({
       jobId,
       freelancerId,
       applicationStatus: "Accepted", // Default status
     });
-
-    // Save the job application
     await jobApplication.save();
-
-    // Add freelancerId to the Applicants array in the Job document
     if (!job.Applicants.includes(freelancerId)) {
       job.Applicants.push(freelancerId);
       await job.save(); // Save the updated Job document

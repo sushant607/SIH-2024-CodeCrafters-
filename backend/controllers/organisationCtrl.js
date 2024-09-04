@@ -110,24 +110,31 @@ const deleteOrgController = async (req, res) => {
 
 // Update Org
 const updateOrgController = async (req, res) => {
-  try {
-    const org = await Organisation.findOneAndUpdate(
-      { userId: req.body.userId },
-      req.body
-    );
-    res.status(201).send({
-      success: true,
-      message: "Org Profile Updated",
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: "Org Profile Update issue",
-      error,
-    });
-  }
-};
+    try {
+      const org = await Organisation.findOneAndUpdate(
+        { userId: req.body.userId },  
+        req.body,
+        { new: true }      
+      );
+      if (!org) {
+        return res.status(404).send({
+          success: false,
+          message: "Organization not found",
+        });
+      }
+      res.status(201).send({
+        success: true,
+        message: "Org Profile Updated"
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success: false,
+        message: "Org Profile Update issue",
+        error,
+      });
+    }
+  };
 
 // Details Org
 const OrgInfoController = async (req, res) => {
@@ -161,7 +168,7 @@ const uploadLogoController = async (req, res) => {
     res.status(200).json({
       message: "File uploaded successfully",
       logoID: logo.public_id,
-      logoURL: logo.secure_url,
+      logoURL: logo.secure_url || logo.url,
     });
   } catch (err) {
     console.error("Error uploading file:", err);
