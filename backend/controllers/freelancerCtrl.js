@@ -2,45 +2,49 @@ import { user } from "../models/user.js";
 import { Freelancer } from "../models/freelancer.js";
 import UploadOnCloudinary from "../util/upload.js";
 import fs from 'fs';
-
+import { generateEmbeddings } from '../embeddings/embeddings.js';
+import {recommendJobs} from './recommendJobs.js';
+import { Job } from "../models/jobs.js";
 // Create Freelancer
 const applyFreelancerController = async (req, res) => {
   try {
-    const { userId } = req.body;
+    console.log("hello boi", req.body);
 
-    // Check if the freelancer profile already exists for the given user
-    const existingFreelancer = await Freelancer.findOne({ userId });
-    if (existingFreelancer) {
-      return res.status(400).json({
-        success: false,
-        message: "Freelancer profile already exists. You cannot apply again.",
-      });
-    }
+    // Extract skills and join them into a single string
+    const { skills, ...otherData } = req.body; // Destructure skills and other data from request body
+    // const skillsJoined = skills.join(" "); // Join skills into a single string
+    const skillsJoined=skills;
 
-    // Find the user by ID to ensure the user exists
-    const newUser = await user.findById(userId);
-    if (!newUser) {
+    // Generate embeddings for the joined skills string
+    const skillsEmbeddings = await generateEmbeddings(skillsJoined);
+
+    // Combine other data with the generated embeddings
+    const newAccData = { ...otherData, skills, embeddings: skillsEmbeddings };
+
+    // Create a new freelancer entry with the data
+    const newFreelancer = await Freelancer.create(newAccData); 
+
+    // Fetch the user by ID to check if the user exists
+    const userId = req.body.userId; 
+    const users = await user.findById(userId); // Make sure `User` model is correctly imported and used
+
+    if (!users) {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-    // Create the new freelancer profile
-    const newAccData = { ...req.body };
-    const newFreelancer = await Freelancer.create(newAccData);
-
-    // Save any necessary changes to the user (optional step if there's any association to be saved)
-    await newUser.save();
+    await users.save(); // If there is a specific field to update, do it here before saving
 
     res.status(201).send({
       success: true,
-      message: "Account applied successfully",
-      data: newFreelancer, // Optionally include the newly created freelancer data
+      message: "Account Applied Successfully",
+      data: newFreelancer, // Optionally return the new freelancer data
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      error: error.message,
-      message: "Error while applying for account",
+      error,
+      message: "Error While Applying For Account",
     });
   }
 };
@@ -142,6 +146,34 @@ const uploadResumeController = async (req, res) => {
   } catch (err) {
     console.error('Error uploading resume:', err);
     res.status(500).json({ message: 'Failed to upload resume', error: err });
+  }
+};
+
+const getRecommendedJobs = async (req, res) => {
+  try {
+    // console.log("userId",req.body)
+    const freelancer = await Freelancer.findOne({ userId: req.body.userId });
+    if (!freelancer) {
+      return res.status(404).send({
+        success: false,
+        message: "Freelancer not found",
+      });
+    }
+    const jobs = await Job.find();
+    const order= await recommendJobs(jobs,freelancer);
+    // console.log("in controller",order)
+    res.status(200).send({
+      success: true,
+      message: "Freelancer data fetch success",
+      data: order,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      error,
+      message: "Error in Fetching Details",
+    });
   }
 };
 

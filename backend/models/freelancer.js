@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  embeddings:[Number]
 }, { timestamps: true });
 
 export const Freelancer = mongoose.model('Freelancer', userSchema);

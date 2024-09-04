@@ -20,5 +20,7 @@ router.put("/update_profile", authMiddleware, updateProfileController);
 router.post("/upload_image", upload.single("file"), authMiddleware,uploadImageController)
 
 //Upload_Resume
-router.post("/upload_resume", upload.single("file"), authMiddleware,uploadResumeController)
+router.post("/upload_resume", upload.single("file"), authMiddleware,uploadResumeController);
+router.get("/recommendJobs", authMiddleware,getRecommendedJobs);
+
 export { router };

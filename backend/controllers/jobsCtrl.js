@@ -1,15 +1,33 @@
 import { user } from "../models/user.js";
 import { Job } from '../models/jobs.js';
 import { Organisation } from "../models/employee.js";
-
+import { generateEmbeddings } from '../embeddings/embeddings.js';
 // Create job
+// const createJobController = async (req, res) => {
+//   try {
+//     const newJob = new Job(req.body); 
+//     const savedJob = await newJob.save(); 
+//     res.status(201).json(savedJob); 
+//   } catch (error) {
+//     res.status(400).json({ message: error.message }); 
+//   }
+// };
 const createJobController = async (req, res) => {
   try {
-    const newJob = new Job(req.body); 
-    const savedJob = await newJob.save(); 
-    res.status(201).json(savedJob); 
+    const { skills_required, ...otherData } = req.body; // Extracting required data
+    const skills = skills_required.join(" "); // Convert array of skills to a single string
+
+    const currentEmbeddings = await generateEmbeddings(skills); // Wait for embeddings to be generated
+
+    // Create a new Job with the embeddings and other data
+    const newJob = new Job({ ...otherData, skills_required, embeddings: currentEmbeddings });
+
+    const savedJob = await newJob.save(); // Save the new job to the database
+
+    res.status(201).json(savedJob); // Return the saved job data
   } catch (error) {
-    res.status(400).json({ message: error.message }); 
+    console.error("Error in createJobController:", error); // Log error for debugging
+    res.status(400).json({ message: error.message }); // Return an error response
   }
 };
 
