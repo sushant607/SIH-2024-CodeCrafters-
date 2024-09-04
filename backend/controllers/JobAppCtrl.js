@@ -1,10 +1,10 @@
-import { JobApplication } from '../models/JobApplication.js';  // Import the JobApplication model
-import { Job } from '../models/jobs.js';  // Import the Job model to update Applicants array
-import { Freelancer } from '../models/freelancer.js';  // Import the Freelancer model
+import { JobApplication } from "../models/JobApplication.js"; // Import the JobApplication model
+import { Job } from "../models/jobs.js"; // Import the Job model to update Applicants array
+import { Freelancer } from "../models/freelancer.js"; // Import the Freelancer model
 
 const createJobApplication = async (req, res) => {
   try {
-    const { jobId, userId } = req.body;  
+    const { jobId, userId } = req.body;
     console.log(userId);
     const job = await Job.findById(jobId);
     if (!job) {
@@ -17,21 +17,15 @@ const createJobApplication = async (req, res) => {
     console.log(freelancer);
 
     const freelancerId = freelancer._id;
-
-    // Create the job application
     const jobApplication = new JobApplication({
       jobId,
       freelancerId,
-      applicationStatus: "Accepted",  // Default status
+      applicationStatus: "Accepted", // Default status
     });
-
-    // Save the job application
     await jobApplication.save();
-
-    // Add freelancerId to the Applicants array in the Job document
     if (!job.Applicants.includes(freelancerId)) {
       job.Applicants.push(freelancerId);
-      await job.save();  // Save the updated Job document
+      await job.save(); // Save the updated Job document
     }
 
     // Return success response
@@ -39,11 +33,28 @@ const createJobApplication = async (req, res) => {
       message: "Job application submitted successfully",
       jobApplication,
     });
-
   } catch (error) {
     console.error("Error submitting job application:", error);
     return res.status(500).json({ message: "Server error, please try again" });
   }
+}; // Adjust the path as needed
+ const getJobApplicationsByFreelancer = async (req, res) => {
+  try {
+    const { freelancerId } = req.params;  // Extract freelancerId from URL
+    const jobApplications = await JobApplication.find({ freelancerId })
+      .populate('jobId', 'title description') // Populate job details
+      .exec();
+
+    if (!jobApplications || jobApplications.length === 0) {
+      return res.status(404).json({ message: 'No job applications found for this freelancer.' });
+    }
+
+    res.status(200).json(jobApplications);
+  } catch (error) {
+    console.error('Error fetching job applications:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 };
 
-export { createJobApplication };
+
+export { createJobApplication,getJobApplicationsByFreelancer };

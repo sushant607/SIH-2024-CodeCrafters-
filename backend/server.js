@@ -26,7 +26,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/jobs", jobsRoutes);
 app.use("/api/v1/freelancer", freelancerRoutes);
 app.use("/api/v1/org", organisationRoutes);
-app.use("/api/v1/freelancer",JobAppRoutes);
+app.use("/api/v1/freelancejobs",JobAppRoutes);
 
 //port
 const port = process.env.PORT || 4000;

@@ -19,7 +19,7 @@ const OrgProfileSection = () => {
             },
           }
         );
-        setOrgData(response.data.data || null); // If data is null, set orgData to null
+        setOrgData(response.data.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setError("Failed to fetch profile data");
@@ -32,7 +32,7 @@ const OrgProfileSection = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (error || !orgData) return <div>{error || "No profile data available."}</div>;
+  if (error) return <div>{error || "No profile data available."}</div>;
 
   const { name, description, roles, logo } = orgData;
 
@@ -40,7 +40,7 @@ const OrgProfileSection = () => {
     <div className={styles.profileContainer}>
       <div className={styles.profileCard}>
         <div className={styles.profileImage}>
-          {logo ? <img src={logo} alt="Organization Logo" /> : <img src={defaultProfileImage} alt="Default Profile" />}
+          {logo ? <img src={logo}/> : <img src={defaultProfileImage}/>}
         </div>
         <div className={styles.profileDetails}>
           <h2>{name}</h2>
@@ -54,7 +54,12 @@ const OrgProfileSection = () => {
               <p>{description}</p>
             </div>
             <Link to="/updateOrgProfile">
-              <button type="button" className='bg-green-500 text-white border-none py-2 px-3 rounded cursor-pointer text-xs mt-2 self-center hover:bg-gray-700'>Update Profile</button>
+              <button
+                type="button"
+                className="bg-green-500 text-white border-none py-2 px-3 rounded cursor-pointer text-xs mt-2 self-center hover:bg-gray-700"
+              >
+                Update Profile
+              </button>
             </Link>
           </div>
         </div>

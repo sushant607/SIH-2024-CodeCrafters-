@@ -58,7 +58,7 @@ const AddJob = () => {
       );
       console.log("done!");
       console.log(response.data);
-      navigate('/jobList');
+      navigate("/jobList");
     } catch (e) {
       console.log("Error occured when trying to create job listing!");
       console.error(e.message);
@@ -67,205 +67,205 @@ const AddJob = () => {
 
   return (
     <main>
-      <h1 className='postjob-title'>Post a Job:</h1>
-      <section className='addjob-cont'>
-        <form action='' onSubmit={handleSubmit} id='addjob-form'>
+      <h1 className="postjob-title">Post a Job:</h1>
+      <section className="addjob-cont">
+        <form action="" onSubmit={handleSubmit} id="addjob-form">
           <div>
-            <label htmlFor='role'>Role:</label>
+            <label htmlFor="role">Role:</label>
             <input
-              type='text'
-              placeholder='Role'
-              id='role'
-              name='role'
+              type="text"
+              placeholder="Role"
+              id="role"
+              name="role"
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label htmlFor='job_description'>Job Description:</label>
+            <label htmlFor="job_description">Job Description:</label>
             <textarea
-              name='job_description'
-              id='job_description'
-              placeholder='Description'
+              name="job_description"
+              id="job_description"
+              placeholder="Description"
               onChange={handleChange}
               required
             ></textarea>
           </div>
           <div>
-            <label htmlFor='skills_required'>Skills Required:</label>
+            <label htmlFor="skills_required">Skills Required:</label>
             <input
-              type='text'
-              name='skills_required'
-              id='skills_required'
-              placeholder='Skills'
+              type="text"
+              name="skills_required"
+              id="skills_required"
+              placeholder="Skills"
               onChange={handleChange}
               required
             />
           </div>
           <div>
             <label>Experience Level:</label>
-            <div className='radio-inputs'>
-              <label htmlFor='entry' className='radio'>
+            <div className="radio-inputs">
+              <label htmlFor="entry" className="radio">
                 <input
-                  type='radio'
-                  name='experience_level'
-                  id='entry'
-                  value='Entry Level'
+                  type="radio"
+                  name="experience_level"
+                  id="entry"
+                  value="Entry Level"
                   onChange={handleChange}
                 />
-                <span className='name'>Entry Level</span>
+                <span className="name">Entry Level</span>
               </label>
-              <label htmlFor='mid' className='radio'>
+              <label htmlFor="mid" className="radio">
                 <input
-                  type='radio'
-                  name='experience_level'
-                  id='mid'
-                  value='Mid Level'
+                  type="radio"
+                  name="experience_level"
+                  id="mid"
+                  value="Mid Level"
                   onChange={handleChange}
                 />
-                <span className='name'>Mid Level</span>
+                <span className="name">Mid Level</span>
               </label>
-              <label htmlFor='senior' className='radio'>
+              <label htmlFor="senior" className="radio">
                 <input
-                  type='radio'
-                  name='experience_level'
-                  id='senior'
-                  value='Senior Level'
+                  type="radio"
+                  name="experience_level"
+                  id="senior"
+                  value="Senior Level"
                   onChange={handleChange}
                 />
-                <span className='name'>Senior Level</span>
+                <span className="name">Senior Level</span>
               </label>
             </div>
           </div>
           <div>
             <label>Project Duration</label>
-            <div className='radio-inputs'>
-              <label htmlFor='short-term' className='radio'>
+            <div className="radio-inputs">
+              <label htmlFor="short-term" className="radio">
                 <input
-                  type='radio'
-                  name='project_duration'
-                  id='short-term'
-                  value='Short Term'
+                  type="radio"
+                  name="project_duration"
+                  id="short-term"
+                  value="Short Term"
                   onChange={handleChange}
                 />
-                <span className='name'>Short Term</span>
+                <span className="name">Short Term</span>
               </label>
-              <label htmlFor='long-term' className='radio'>
+              <label htmlFor="long-term" className="radio">
                 <input
-                  type='radio'
-                  name='project_duration'
-                  id='long-term'
-                  value='Long Term'
+                  type="radio"
+                  name="project_duration"
+                  id="long-term"
+                  value="Long Term"
                   onChange={handleChange}
                 />
-                <span className='name'>Long Term</span>
+                <span className="name">Long Term</span>
               </label>
-              <label htmlFor='contract' className='radio'>
+              <label htmlFor="contract" className="radio">
                 <input
-                  type='radio'
-                  name='project_duration'
-                  id='contract'
-                  value='Contract'
+                  type="radio"
+                  name="project_duration"
+                  id="contract"
+                  value="Contract"
                   onChange={handleChange}
                 />
-                <span className='name'>Contract</span>
+                <span className="name">Contract</span>
               </label>
-              <label htmlFor='permanent' className='radio'>
+              <label htmlFor="permanent" className="radio">
                 <input
-                  type='radio'
-                  name='project_duration'
-                  id='permanent'
-                  value='Permanent'
+                  type="radio"
+                  name="project_duration"
+                  id="permanent"
+                  value="Permanent"
                   onChange={handleChange}
                 />
-                <span className='name'>Permanent</span>
+                <span className="name">Permanent</span>
               </label>
             </div>
           </div>
           <div>
-            <label htmlFor='compensation'>Compensation Details:</label>
+            <label htmlFor="compensation">Compensation Details:</label>
             <input
-              type='text'
-              name='compensation'
-              id='compensation'
+              type="text"
+              name="compensation"
+              id="compensation"
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label htmlFor='application_deadline'>Application Deadline:</label>
+            <label htmlFor="application_deadline">Application Deadline:</label>
             <input
-              type='date'
-              name='application_deadline'
-              id='application_deadline'
+              type="date"
+              name="application_deadline"
+              id="application_deadline"
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label htmlFor=''>Location:</label>
-            <div className='radio-inputs'>
-              <label htmlFor='remote' className='radio'>
+            <label htmlFor="">Location:</label>
+            <div className="radio-inputs">
+              <label htmlFor="remote" className="radio">
                 <input
-                  type='radio'
-                  name='location_requirements'
-                  id='remote'
-                  value='Remote'
+                  type="radio"
+                  name="location_requirements"
+                  id="remote"
+                  value="Remote"
                   onChange={handleChange}
                 />
-                <span className='name'>Remote</span>
+                <span className="name">Remote</span>
               </label>
-              <label htmlFor='on-site' className='radio'>
+              <label htmlFor="on-site" className="radio">
                 <input
-                  type='radio'
-                  name='location_requirements'
-                  id='on-site'
-                  value='On-site'
+                  type="radio"
+                  name="location_requirements"
+                  id="on-site"
+                  value="On-site"
                   onChange={handleChange}
                 />
-                <span className='name'>On-Site</span>
+                <span className="name">On-Site</span>
               </label>
-              <label htmlFor='hybrid' className='radio'>
+              <label htmlFor="hybrid" className="radio">
                 <input
-                  type='radio'
-                  name='location_requirements'
-                  id='hybrid'
-                  value='Hybrid'
+                  type="radio"
+                  name="location_requirements"
+                  id="hybrid"
+                  value="Hybrid"
                   onChange={handleChange}
                 />
-                <span className='name'>Hybrid</span>
+                <span className="name">Hybrid</span>
               </label>
             </div>
           </div>
         </form>
-        <section className='submit-section'>
+        <section className="submit-section">
           <div>
-            <label htmlFor='contact_information'>Contact Information:</label>
+            <label htmlFor="contact_information">Contact Information:</label>
             <input
-              type='text'
-              name='contact_information'
-              id='contact_information'
-              form='addjob-form'
+              type="text"
+              name="contact_information"
+              id="contact_information"
+              form="addjob-form"
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <label htmlFor='company_description'>Company Description:</label>
+            <label htmlFor="company_description">Company Description:</label>
             <textarea
-              name='company_description'
-              id='company_description'
-              form='addjob-form'
+              name="company_description"
+              id="company_description"
+              form="addjob-form"
               onChange={handleChange}
               required
             />
           </div>
           {error && (
-            <p className='font-mono text-red-600 bg-red-200 border-red-600 w-full text-center rounded px-2 py-1'>
+            <p className="font-mono text-red-600 bg-red-200 border-red-600 w-full text-center rounded px-2 py-1">
               {error}
             </p>
           )}
-          <button type='submit' form='addjob-form' className='submit-button'>
+          <button type="submit" form="addjob-form" className="submit-button">
             POST JOB
           </button>
         </section>

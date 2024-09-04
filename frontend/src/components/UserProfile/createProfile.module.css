@@ -1,15 +1,3 @@
-/* General Container Styling */
-/* body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-} */
-
 .profile-container {
   display: flex;
   justify-content: space-between; /* Distribute space between items */
@@ -31,8 +19,7 @@
   padding: 0px;
   background-color: white; /* Neutral background */
 }
-.object-fill
-{
+.object-fill {
   height: 600px;
   width: 600px;
 }
@@ -281,7 +268,8 @@
 }
 /* Keyframes for animations */
 @keyframes focus-pulse {
-  0%, 100% {
+  0%,
+  100% {
     border-color: #000;
   }
   50% {
