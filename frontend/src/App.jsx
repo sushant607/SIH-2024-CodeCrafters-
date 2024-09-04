@@ -15,7 +15,7 @@ import JobList from "./components/JobList/JobList";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
 import CreateProfile from "./components/UserProfile/createProfile";
-import OrgJobList from "./components/OrgJobList/OrgJobList";
+import OrgPageListing from "./components/OrgJobList/OrgJobList";
 import JobandUser from "./components/JobandUser/JobandUser";
 import OrgProfileSection from "./components/ViewOrgProfile/ViewOrgProfile";
 import Features from "./components/Features/Features";
