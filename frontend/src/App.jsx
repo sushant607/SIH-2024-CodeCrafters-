@@ -19,6 +19,7 @@ import JobandUser from "./components/JobandUser/JobandUser";
 import OrgProfileSection from "./components/ViewOrgProfile/ViewOrgProfile";
 import Features from "./components/Features/Features";
 import RecommendedJobs from './components/RecommendedJobs/RecommendedJobs'
+import Error from "./components/Error/Error";
 function App() {
   return (
     <>
@@ -43,6 +44,7 @@ function App() {
           <Route path='/job/:id' element={<JobPage />} />
           <Route path='/addjob' element={<AddJob/>} />
           <Route path='/recommendedJobs' element={<RecommendedJobs/>} />
+          <Route path='*' element={<Error/>} />
 
         </Routes>
         <Footer/>

@@ -191,4 +191,4 @@ const getRecommendedJobs = async (req, res) => {
 };
 
 
-export { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController, uploadImageController, uploadResumeController };
+export { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController, uploadImageController, uploadResumeController, getRecommendedJobs };
