@@ -22,6 +22,7 @@ import Features from "./components/Features/Features";
 import RecommendedJobs from "./components/RecommendedJobs/RecommendedJobs";
 import Error from "./components/Error/Error";
 import UserInfoForm from "./components/UserInfoForm/UserInfoForm";
+import ViewApplicants from "./components/ViewApplicants/ViewApplicants";
 function App() {
   return (
     <>
@@ -45,11 +46,11 @@ function App() {
           <Route path='/orgProfile' element={<OrgProfile />} />
           <Route path='/currentjobs' element={<JobPage />} />
           <Route path='/job/:id' element={<JobPage />} />
-          <Route path='/addjob' element={<AddJob/>} />
-          <Route path='/recommendedJobs' element={<RecommendedJobs/>} />
-          <Route path='/form' element={<UserInfoForm/>} />
-          <Route path='*' element={<Error/>} />
-
+          <Route path='/addjob' element={<AddJob />} />
+          <Route path='/recommendedJobs' element={<RecommendedJobs />} />
+          <Route path='/form' element={<UserInfoForm />} />
+          <Route path='*' element={<Error />} />
+          <Route path='/recruit/:id' element={<ViewApplicants />} />
         </Routes>
         <Footer />
       </BrowserRouter>
