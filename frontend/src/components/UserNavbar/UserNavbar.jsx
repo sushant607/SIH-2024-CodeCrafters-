@@ -34,7 +34,6 @@ const UserNavbar = () => {
     }
   };
 
-
   useEffect(() => {
     checkProfileCreated();
   }, [isProfileCreated]);

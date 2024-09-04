@@ -21,6 +21,6 @@ router.post("/update_id_job/:id", authMiddleware, updateJobController);
 router.post("/delete_id_job/:id", authMiddleware, deleteJobController);
 
 //VIEW_JOBS_COMPANY || GET
-router.get("/get_all_job", authMiddleware, viewJobsCompanySpecific);
+router.get("/get_company_job", authMiddleware, viewJobsCompanySpecific);
 
 export { router };

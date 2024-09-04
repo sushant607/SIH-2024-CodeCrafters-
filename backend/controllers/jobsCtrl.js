@@ -14,6 +14,7 @@ import { generateEmbeddings } from "../embeddings/embeddings.js";
 // };
 const createJobController = async (req, res) => {
   try {
+    console.log(req.body)
     const { skills_required, ...otherData } = req.body; // Extracting required data
     const skills = skills_required.join(" "); // Convert array of skills to a single string
 
@@ -99,21 +100,11 @@ const deleteJobController = async (req, res) => {
 // View jobs company specific
 const viewJobsCompanySpecific = async (req, res) => {
   try {
-    const organization = await Organisation.findById(
-      req.params.companyId
-    ).populate("Jobs_offered");
-
-    if (!organization) {
-      return res
-        .status(404)
-        .send({ message: "Company not found", success: false });
-    }
-
-    const jobs = await Job.find({ _id: { $in: organization.Jobs_offered } });
+    const userId=req.body.userId;
+    const jobs = await Job.find({userId:userId});
 
     res.status(200).json({
       success: true,
-      company: organization.Company_name,
       jobs,
     });
   } catch (error) {
