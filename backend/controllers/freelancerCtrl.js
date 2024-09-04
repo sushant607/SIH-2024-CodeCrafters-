@@ -44,6 +44,17 @@ const applyFreelancerController = async (req, res) => {
     });
   }
 };
+const getFreelancerbyid = async (req, res) => {
+  try {
+    const freelancer = await Freelancer.findById(req.params.id);
+    if (!freelancer) {
+      return res.status(404).json({ message: "Freelancer not found" });
+    }
+    res.status(200).json(freelancer);  // Fixed to return freelancer data
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Details Freelancer
 const FreelancerInfoController = async (req, res) => {
@@ -135,4 +146,4 @@ const uploadResumeController = async (req, res) => {
 };
 
 
-export { applyFreelancerController, FreelancerInfoController, updateProfileController, uploadImageController, uploadResumeController };
+export { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController, uploadImageController, uploadResumeController };

@@ -1,5 +1,5 @@
 import express from "express";
-import { applyFreelancerController, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController } from "../controllers/freelancerCtrl.js";
+import { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController } from "../controllers/freelancerCtrl.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import upload from '../middlewares/multer.js';
 const router = express.Router();
@@ -10,6 +10,8 @@ router.post("/profile", authMiddleware, applyFreelancerController);
 
 //VIEW_Profile || GET
 router.get("/view_profile", authMiddleware, FreelancerInfoController);
+
+router.get("view_profile/:id", authMiddleware, getFreelancerbyid);
 
 //Update_Profile || GET
 router.put("/update_profile", authMiddleware, updateProfileController);
