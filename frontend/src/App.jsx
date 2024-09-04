@@ -9,6 +9,7 @@ import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from './components/Footer/Footer';
 import OrgProfile from "./components/OrgProfile/OrgProfile";
+import MyJobPage from "./components/MyJobs/MyJobPage";
 import UpdateOrgProfile from "./components/UpdateOrgProfile/UpdateOrgProfile";
 import JobList from "./components/JobList/JobList";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
@@ -32,6 +33,7 @@ function App() {
           <Route path='/features' element={<Features />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/job' element={<JobPage />} />
+          <Route path='/myjobs' element={<MyJobPage />} />
           <Route path='/updateOrgProfile' element={<UpdateOrgProfile />} />
           <Route path='/jobList' element={<JobList />} />
           <Route path='/orgJobList' element={<OrgPageListing />} />

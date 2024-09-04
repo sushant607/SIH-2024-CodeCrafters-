@@ -34,7 +34,7 @@ const JobPage = () => {
         freelancerId: f_id,  // Use freelancer ID from URL params
       };
 
-      const res = await axios.post('http://localhost:4000/api/v1/freelancer/apply', applicationData, {
+      const res = await axios.post('http://localhost:4000/api/v1/freelancejobs/apply', applicationData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
