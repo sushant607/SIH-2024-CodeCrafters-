@@ -8,6 +8,7 @@ import { router as userRoutes } from "./routes/userRoutes.js";
 import { router as jobsRoutes } from "./routes/jobRoutes.js";
 import { router as freelancerRoutes } from "./routes/freelancerRoutes.js";
 import { router as organisationRoutes } from "./routes/organisationRoutes.js";
+import {router as JobAppRoutes} from "./routes/JobApplyRoutes.js"
 import cors from "cors";
 //dotenv conig
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/jobs", jobsRoutes);
 app.use("/api/v1/freelancer", freelancerRoutes);
 app.use("/api/v1/org", organisationRoutes);
+app.use("/api/v1/freelancer",JobAppRoutes);
 
 //port
 const port = process.env.PORT || 4000;
