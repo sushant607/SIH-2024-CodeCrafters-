@@ -1,6 +1,6 @@
-import { JobApplication } from '../models/JobApplication.js';  // Import the JobApplication model
-import { Job } from '../models/jobs.js';  // Import the Job model to update Applicants array
-import { Freelancer } from '../models/freelancer.js';  // Import the Freelancer model
+import { JobApplication } from '../models/JobApplication.js';  
+import { Job } from '../models/jobs.js';  
+import { Freelancer } from '../models/freelancer.js';  
 
 const createJobApplication = async (req, res) => {
   try {
@@ -17,21 +17,15 @@ const createJobApplication = async (req, res) => {
     console.log(freelancer);
 
     const freelancerId = freelancer._id;
-
-    // Create the job application
     const jobApplication = new JobApplication({
       jobId,
       freelancerId,
       applicationStatus: "Accepted",  // Default status
     });
-
-    // Save the job application
     await jobApplication.save();
-
-    // Add freelancerId to the Applicants array in the Job document
     if (!job.Applicants.includes(freelancerId)) {
       job.Applicants.push(freelancerId);
-      await job.save();  // Save the updated Job document
+      await job.save();  
     }
 
     // Return success response
