@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './createProfile.module.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const CreateProfile = () => {
   const [userName, setUserName] = useState('');
@@ -227,9 +226,6 @@ const resumeUpload = async () => {
 
           <div className='flex justify-between'>
             <button type="submit" className={styles['button']}>Create Profile</button>
-            <Link to="/updateProfile">
-              <button type="button" className={styles['button']}>Update Profile</button>
-            </Link>
           </div>
         </form>
       </section>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './OrgProfile.module.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const OrgProfile = () => {
   const [userName, setUserName] = useState('');
@@ -147,9 +146,6 @@ const OrgProfile = () => {
 
           <div className="flex justify-between">
             <button type="submit" className={styles['button']}>Create Profile</button>
-            <Link to="/updateOrgProfile">
-              <button type="button" className={styles['button']}>Update Profile</button>
-            </Link>
           </div>
         </form>
       </section>

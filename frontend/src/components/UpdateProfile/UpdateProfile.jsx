@@ -8,12 +8,13 @@ const UpdateProfile = () => {
   const [about, setAbout] = useState("");
   const [skills, setSkills] = useState("");
   const [resume, setResume] = useState(null);
+  const [resumeURL, setResumeURL] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [photoURL, setPhotoURL] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const token = localStorage.getItem("token");
 
-  // Fetch user profile data on component mount
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
@@ -24,13 +25,12 @@ const UpdateProfile = () => {
         });
         const { name, email, about, skills, resume, photo } = response.data.data;
 
-        // Set the state with fetched data
         setUserName(name);
         setEmail(email);
         setAbout(about);
         setSkills(skills);
-        setResume(resume); // Assuming the backend returns the URL or file reference
-        setPhoto(photo); // Assuming the backend returns the URL or file reference
+        setResumeURL(resume);
+        setPhotoURL(photo);
       } catch (err) {
         console.error("Failed to fetch profile data:", err);
       }
@@ -39,15 +39,8 @@ const UpdateProfile = () => {
     fetchProfileData();
   }, [token]);
 
-  // useEffect(() => {
-  //   if (imageData && resumeData && imageData.photo && resumeData.photo) {
-  //     setResume(resumeData.photo);
-  //     setPhoto(imageData.photo);
-  //   }
-  // }, [imageData, resumeData]);
-
   const resumeUpload = async () => {
-    if (!resume) return null; // Ensure a file is selected
+    if (!resume || typeof resume === "string") return resumeURL;
   
     const formData = new FormData();
     formData.append("file", resume);
@@ -80,7 +73,7 @@ const UpdateProfile = () => {
     
     // Function to upload photo
     const imageUpload = async () => {
-      if (!photo) return null;
+      if (!photo || typeof photo === "string") return photoURL;
   
       const formData = new FormData();
       formData.append("file", photo);
@@ -96,10 +89,10 @@ const UpdateProfile = () => {
           }
         );
         console.log('Photo upload response:', upload);
-        return upload.data.imageURL;
+        return upload.data.imageURL || photoURL;
       } catch (e) {
         console.error('Error during photo upload:', e);
-        return null;
+        return photoURL;
       }
     };
 
@@ -123,6 +116,7 @@ const UpdateProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const uploadedPhotoURL = await imageUpload();
       const uploadedResumeURL = await resumeUpload();
@@ -130,14 +124,15 @@ const UpdateProfile = () => {
       if (!uploadedPhotoURL || !uploadedResumeURL) {
         alert('Failed to upload files. Please try again.');
         console.error('Upload failure details:', { uploadedPhotoURL, uploadedResumeURL });
+        setLoading(false);
         return;
       }
 
       console.log('Uploaded Photo URL:', uploadedPhotoURL);
       console.log('Uploaded Resume URL:', uploadedResumeURL);
 
-      setPhotoURL(uploadedPhotoURL);
-      setResumeURL(uploadedResumeURL);
+      // setPhotoURL(uploadedPhotoURL);
+      // setResumeURL(uploadedResumeURL);
 
       const formData = {
         name: userName,
@@ -161,10 +156,12 @@ const UpdateProfile = () => {
         }
       );
 
-      alert(response.data.message || 'Profile created successfully!');
+      alert(response.data.message || 'Profile update successfully!');
     } catch (error) {
-      console.error("Error creating profile:", error);
-      alert("Failed to create profile, please try again.");
+      console.error("Error updating profile:", error);
+      alert("Failed to update profile, please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -239,8 +236,8 @@ const UpdateProfile = () => {
               onChange={handleResumeChange}
               className={styles["brutalist-input"]}
             />
-            {resume && (
-              <a href={resume} target="_blank" rel="noopener noreferrer">
+            {resumeURL && (
+              <a href={resumeURL} target="_blank" rel="noopener noreferrer">
                 View current resume
               </a>
             )}
@@ -256,19 +253,26 @@ const UpdateProfile = () => {
               onChange={handlePhotoChange}
               className={styles["brutalist-input"]}
             />
-            {photo && (
+            {/* {photoURL && (
               <img
                 src={typeof photo === "string" ? photo : URL.createObjectURL(photo)}
                 alt="Profile"
                 className={styles["profile-photo"]}
                 style={{ maxWidth: "100px", borderRadius: "50%" }}
               />
+            )} */}
+            {photoURL && (
+              <img
+                src={photoURL}
+                alt="Profile"
+                className={styles["profile-photo"]}
+                style={{ maxWidth: "100px", maxHeight: "100px", borderRadius: "50%" }}
+              />
             )}
           </div>
 
-          <button type="submit" className={styles["button"]} disabled={loading}>
-            {loading ? "Updating..." : "Update Profile"}
-          </button>
+          <button type="submit" className={styles['button']}disabled={loading}>
+          {loading ? 'Updating...' : 'Update Profile'}</button>
           {error && <p className="text-red-500 mt-3 font-semibold">{error}</p>}
         </form>
       </section>

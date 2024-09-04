@@ -103,8 +103,15 @@ const updateOrgController = async (req, res) => {
     try {
       const org = await Organisation.findOneAndUpdate(
         { userId: req.body.userId },  
-        req.body,          
+        req.body,
+        { new: true }      
       );
+      if (!org) {
+        return res.status(404).send({
+          success: false,
+          message: "Organization not found",
+        });
+      }
       res.status(201).send({
         success: true,
         message: "Org Profile Updated"
@@ -151,7 +158,7 @@ const uploadLogoController = async (req, res) => {
     res.status(200).json({
       message: 'File uploaded successfully',
       logoID: logo.public_id,
-      logoURL: logo.secure_url,
+      logoURL: logo.secure_url || logo.url,
     });
   } catch (err) {
     console.error('Error uploading file:', err);

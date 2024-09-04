@@ -19,7 +19,7 @@ const ProfileSection = () => {
             },
           }
         );
-        setUserData(response.data.data); // Assuming 'data' contains the user profile
+        setUserData(response.data.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setError("Failed to fetch profile data");
@@ -44,10 +44,6 @@ const ProfileSection = () => {
         <div className={styles.profileDetails}>
           <h2>{name}</h2>
           <div className={styles.profileInfo}>
-            {/* <div className={styles.profileField}>
-              <label>Location:</label>
-              <p>{location}</p>
-            </div> */}
             <div className={styles.profileField}>
               <label>Email:</label>
               <p>{email}</p>
