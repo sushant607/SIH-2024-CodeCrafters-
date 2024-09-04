@@ -1,15 +1,15 @@
 import { user } from "../models/user.js";
-import { Job } from '../models/jobs.js';
+import { Job } from "../models/jobs.js";
 import { Organisation } from "../models/employee.js";
-import { generateEmbeddings } from '../embeddings/embeddings.js';
+import { generateEmbeddings } from "../embeddings/embeddings.js";
 // Create job
 // const createJobController = async (req, res) => {
 //   try {
-//     const newJob = new Job(req.body); 
-//     const savedJob = await newJob.save(); 
-//     res.status(201).json(savedJob); 
+//     const newJob = new Job(req.body);
+//     const savedJob = await newJob.save();
+//     res.status(201).json(savedJob);
 //   } catch (error) {
-//     res.status(400).json({ message: error.message }); 
+//     res.status(400).json({ message: error.message });
 //   }
 // };
 const createJobController = async (req, res) => {
@@ -20,7 +20,11 @@ const createJobController = async (req, res) => {
     const currentEmbeddings = await generateEmbeddings(skills); // Wait for embeddings to be generated
 
     // Create a new Job with the embeddings and other data
-    const newJob = new Job({ ...otherData, skills_required, embeddings: currentEmbeddings });
+    const newJob = new Job({
+      ...otherData,
+      skills_required,
+      embeddings: currentEmbeddings,
+    });
 
     const savedJob = await newJob.save(); // Save the new job to the database
 
@@ -34,10 +38,10 @@ const createJobController = async (req, res) => {
 // Get all jobs
 const getAllJobsController = async (req, res) => {
   try {
-    const jobs = await Job.find(); 
-    res.status(200).json(jobs); 
+    const jobs = await Job.find();
+    res.status(200).json(jobs);
   } catch (error) {
-    res.status(500).json({ message: error.message }); 
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -46,24 +50,21 @@ const getJobByIdController = async (req, res) => {
   try {
     const job = await Job.findById(req.params.id);
     if (!job) {
-      return res.status(404).json({ message: "Job not found" }); 
+      return res.status(404).json({ message: "Job not found" });
     }
-    res.status(200).json(job); 
+    res.status(200).json(job);
   } catch (error) {
-    res.status(500).json({ message: error.message }); 
+    res.status(500).json({ message: error.message });
   }
 };
 
 // Update job
 const updateJobController = async (req, res) => {
   try {
-    const jobs = await Job.findOneAndUpdate(
-      { _id: req.params.id },  
-      req.body,          
-    );
+    const jobs = await Job.findOneAndUpdate({ _id: req.params.id }, req.body);
     res.status(201).send({
       success: true,
-      message: "Job Profile Updated"
+      message: "Job Profile Updated",
     });
   } catch (error) {
     console.log(error);
@@ -82,7 +83,9 @@ const deleteJobController = async (req, res) => {
     if (!job) {
       return res.status(404).send({ message: "Job not found", success: false });
     }
-    res.status(200).send({ message: "Job deleted successfully", success: true });
+    res
+      .status(200)
+      .send({ message: "Job deleted successfully", success: true });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -96,10 +99,14 @@ const deleteJobController = async (req, res) => {
 // View jobs company specific
 const viewJobsCompanySpecific = async (req, res) => {
   try {
-    const organization = await Organisation.findById(req.params.companyId).populate('Jobs_offered');
+    const organization = await Organisation.findById(
+      req.params.companyId
+    ).populate("Jobs_offered");
 
     if (!organization) {
-      return res.status(404).send({ message: "Company not found", success: false });
+      return res
+        .status(404)
+        .send({ message: "Company not found", success: false });
     }
 
     const jobs = await Job.find({ _id: { $in: organization.Jobs_offered } });
@@ -111,14 +118,19 @@ const viewJobsCompanySpecific = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error retrieving jobs for the company', error });
+    res
+      .status(500)
+      .json({ message: "Error retrieving jobs for the company", error });
   }
-}
+};
 
 // Applications
 
-
-
-
-export { createJobController, getAllJobsController, getJobByIdController, updateJobController, deleteJobController, viewJobsCompanySpecific };
-
+export {
+  createJobController,
+  getAllJobsController,
+  getJobByIdController,
+  updateJobController,
+  deleteJobController,
+  viewJobsCompanySpecific,
+};

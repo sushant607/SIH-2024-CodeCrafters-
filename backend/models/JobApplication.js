@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
-const jobApplicationSchema = new mongoose.Schema({
+const jobApplicationSchema = new mongoose.Schema(
+  {
     jobId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Job',
+      ref: "Job",
       required: true,
     },
     freelancerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Freelancer',
+      ref: "Freelancer",
       required: true,
     },
     applicationStatus: {
@@ -20,6 +21,11 @@ const jobApplicationSchema = new mongoose.Schema({
       default: Date.now,
     },
     hiredOn: Date,
-  }, { timestamps: true });
-  
-  export const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
+  },
+  { timestamps: true }
+);
+
+export const JobApplication = mongoose.model(
+  "JobApplication",
+  jobApplicationSchema
+);

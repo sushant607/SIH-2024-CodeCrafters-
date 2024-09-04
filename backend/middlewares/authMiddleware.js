@@ -1,4 +1,4 @@
-import  JWT from 'jsonwebtoken' ;
+import JWT from "jsonwebtoken";
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -18,9 +18,9 @@ const authMiddleware = async (req, res, next) => {
           success: false,
         });
       } else {
-        console.log('hello',req.body)
+        console.log("hello", req.body);
         req.body.userId = decode.id;
-        console.log(req.body)
+        console.log(req.body);
         next();
       }
     });
@@ -33,4 +33,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-export {authMiddleware};
+export { authMiddleware };
