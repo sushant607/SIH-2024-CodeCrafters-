@@ -88,20 +88,32 @@ const FreelancerInfoController = async (req, res) => {
 // Update Profile
 const updateProfileController = async (req, res) => {
   try {
+    const { userId, skills, ...updateData } = req.body; // Destructure userId, skills, and other update data
+
+    // Generate embeddings for the updated skills string
+    const skillsJoined = skills; // Skills already in a desired format
+    const skillsEmbeddings = await generateEmbeddings(skillsJoined);
+
+    // Combine update data with the new embeddings
+    const updatedData = { ...updateData, skills, embeddings: skillsEmbeddings };
+
     const freelancer = await Freelancer.findOneAndUpdate(
-      { userId: req.body.userId },
-      req.body,
-      { new: true }
+      { userId },
+      updatedData,
+      { new: true } // Return the updated document
     );
+
     if (!freelancer) {
       return res.status(404).send({
         success: false,
         message: "Freelancer not found",
       });
     }
+
     res.status(200).send({
       success: true,
       message: "Freelancer Profile Updated",
+      data: freelancer, // Optionally return the updated freelancer data
     });
   } catch (error) {
     console.log(error);
@@ -112,6 +124,7 @@ const updateProfileController = async (req, res) => {
     });
   }
 };
+
 
 const uploadImageController = async (req, res) => {
   try {

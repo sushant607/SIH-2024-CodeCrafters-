@@ -11,6 +11,8 @@ const UpdateProfile = () => {
   const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [resumeURL, setResumeURL] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
   const token = localStorage.getItem("token");
 
   // Fetch user profile data on component mount
