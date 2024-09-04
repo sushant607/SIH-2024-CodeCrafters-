@@ -1,10 +1,10 @@
-import { JobApplication } from '../models/JobApplication.js';  
-import { Job } from '../models/jobs.js';  
-import { Freelancer } from '../models/freelancer.js';  
+import { JobApplication } from "../models/JobApplication.js"; // Import the JobApplication model
+import { Job } from "../models/jobs.js"; // Import the Job model to update Applicants array
+import { Freelancer } from "../models/freelancer.js"; // Import the Freelancer model
 
 const createJobApplication = async (req, res) => {
   try {
-    const { jobId, userId } = req.body;  
+    const { jobId, userId } = req.body;
     console.log(userId);
     const job = await Job.findById(jobId);
     if (!job) {
@@ -20,12 +20,12 @@ const createJobApplication = async (req, res) => {
     const jobApplication = new JobApplication({
       jobId,
       freelancerId,
-      applicationStatus: "Accepted",  // Default status
+      applicationStatus: "Accepted", // Default status
     });
     await jobApplication.save();
     if (!job.Applicants.includes(freelancerId)) {
       job.Applicants.push(freelancerId);
-      await job.save();  
+      await job.save(); // Save the updated Job document
     }
 
     // Return success response
@@ -33,7 +33,6 @@ const createJobApplication = async (req, res) => {
       message: "Job application submitted successfully",
       jobApplication,
     });
-
   } catch (error) {
     console.error("Error submitting job application:", error);
     return res.status(500).json({ message: "Server error, please try again" });

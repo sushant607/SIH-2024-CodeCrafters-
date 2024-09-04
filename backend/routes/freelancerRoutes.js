@@ -1,5 +1,5 @@
 import express from "express";
-import { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController } from "../controllers/freelancerCtrl.js";
+import { applyFreelancerController,getFreelancerbyid, FreelancerInfoController, updateProfileController,uploadImageController, uploadResumeController, getRecommendedJobs } from "../controllers/freelancerCtrl.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import { recommendJobs } from "../controllers/recommendJobs.js"; 
 import upload from '../middlewares/multer.js';

@@ -95,12 +95,12 @@ const UserNavbar = () => {
               </Link>
             )}
 
-            <Link
+            {!isProfileCreated &&(<Link
               to="/createProfile"
               className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
             >
               Create Profile
-            </Link>
+            </Link>)}
           </div>
 
           <div className="hidden md:flex">

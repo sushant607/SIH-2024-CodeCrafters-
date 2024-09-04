@@ -39,11 +39,11 @@ const recommendJobs = async (jobs, user) => {
 
   const resumeEmbedding1D = tensor(user.embeddings);
   // resumeEmbedding1D.print(true);
-  console.log('Skills:', resumeEmbedding1D.shape);
+  console.log("Skills:", resumeEmbedding1D.shape);
 
   for (const job of jobs) {
     const jobEmbedding1D = tensor(job.embeddings);
-    console.log('Job embedding shape:', jobEmbedding1D.shape);
+    console.log("Job embedding shape:", jobEmbedding1D.shape);
 
     try {
       const similarityTensor = await computeCosineSimilarity(
@@ -54,7 +54,7 @@ const recommendJobs = async (jobs, user) => {
       const similarity = (await similarityTensor.data())[0];
       pq.enqueue(job, similarity);
     } catch (error) {
-      console.error('Error computing similarity for job:', job, error);
+      console.error("Error computing similarity for job:", job, error);
     }
   }
 
@@ -67,14 +67,13 @@ const recommendJobs = async (jobs, user) => {
     if (job) {
       order.push(job.node);
     } else {
-      console.warn('Dequeued job is undefined.');
+      console.warn("Dequeued job is undefined.");
     }
   }
 
   // console.log("Final order:", order);  // Debugging output
-  console.log('done')
+  console.log("done");
   return order;
 };
 
-  
-export {recommendJobs};
+export { recommendJobs };
