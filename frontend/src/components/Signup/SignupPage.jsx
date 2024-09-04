@@ -12,18 +12,21 @@ function SignupPage() {
   const [role, setRole] = useState("user");
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:4000/api/v1/user/register", {
-        username: username,
-        password: password,
-        name: name,
-        email: email,
-        role: role,
-      });
+      const res = await axios.post(
+        "http://localhost:4000/api/v1/user/register",
+        {
+          username: username,
+          password: password,
+          name: name,
+          email: email,
+          role: role,
+        }
+      );
       if (res.data.success) {
         console.log("Register Successfully!");
         alert("Register Successfully!");
         navigate("/login");
-      } 
+      }
     } catch (error) {
       console.log(error);
       alert(error.response.data.message || "Validation failed.");
@@ -125,9 +128,19 @@ function SignupPage() {
               <label className={styles.brutalistLabel}>ROLE</label>
             </div>
           </div>
-          <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center pb-2" >Already a user? 
-              <Link to="/login" style={{color:"#372bb2"}} className="underline ml-3">LOGIN</Link>
-              </p>
+          <p
+            style={{ fontFamily: "monospace", fontSize: "1.15rem" }}
+            className="font-bold self-center pb-2"
+          >
+            Already a user?
+            <Link
+              to="/login"
+              style={{ color: "#372bb2" }}
+              className="underline ml-3"
+            >
+              LOGIN
+            </Link>
+          </p>
           <div className="flex items-center">
             <button
               style={{ fontFamily: "monospace" }}

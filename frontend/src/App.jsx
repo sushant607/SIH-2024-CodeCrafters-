@@ -7,7 +7,7 @@ import JobPage from "./components/JobPage/JobPage";
 import ProfileSection from "./components/ViewProfile/Profile";
 import Home from "./components/Home/Home";
 import Navbar from "./components/Navbar/Navbar";
-import Footer from './components/Footer/Footer';
+import Footer from "./components/Footer/Footer";
 import OrgProfile from "./components/OrgProfile/OrgProfile";
 import MyJobPage from "./components/MyJobs/MyJobPage";
 import UpdateOrgProfile from "./components/UpdateOrgProfile/UpdateOrgProfile";
@@ -15,13 +15,13 @@ import JobList from "./components/JobList/JobList";
 import UpdateProfile from "./components/UpdateProfile/UpdateProfile";
 import AddJob from "./components/AddJob/AddJob";
 import CreateProfile from "./components/UserProfile/createProfile";
-import OrgPageListing from "./components/OrgPageList/OrgPageListing";
+import OrgJobList from "./components/OrgJobList/OrgJobList";
 import JobandUser from "./components/JobandUser/JobandUser";
 import OrgProfileSection from "./components/ViewOrgProfile/ViewOrgProfile";
 import Features from "./components/Features/Features";
-import RecommendedJobs from './components/RecommendedJobs/RecommendedJobs'
+import RecommendedJobs from "./components/RecommendedJobs/RecommendedJobs";
 import Error from "./components/Error/Error";
-import UserInfoForm from './components/UserInfoForm/UserInfoForm'
+import UserInfoForm from "./components/UserInfoForm/UserInfoForm";
 function App() {
   return (
     <>
@@ -51,7 +51,7 @@ function App() {
           <Route path='*' element={<Error/>} />
 
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </>
   );

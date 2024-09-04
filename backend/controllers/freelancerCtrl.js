@@ -165,7 +165,7 @@ const uploadResumeController = async (req, res) => {
 
 const getRecommendedJobs = async (req, res) => {
   try {
-    // console.log("userId",req.body)
+    console.log("userId",req.body)
     const freelancer = await Freelancer.findOne({ userId: req.body.userId });
     if (!freelancer) {
       return res.status(404).send({
@@ -175,7 +175,7 @@ const getRecommendedJobs = async (req, res) => {
     }
     const jobs = await Job.find();
     const order = await recommendJobs(jobs, freelancer);
-    // console.log("in controller",order)
+    console.log("in controller",order)
     res.status(200).send({
       success: true,
       message: "Freelancer data fetch success",

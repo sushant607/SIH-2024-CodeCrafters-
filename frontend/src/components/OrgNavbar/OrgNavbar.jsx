@@ -56,16 +56,25 @@ const OrgNavbar = () => {
           </div>
 
           <div className="hidden md:flex md:items-center md:justify-center md:space-x-10">
-            <Link to="/orgJobList" className="text-base font-medium text-gray-900 hover:text-opacity-50">
+            <Link
+              to="/orgJobList"
+              className="text-base font-medium text-gray-900 hover:text-opacity-50"
+            >
               Manage Listings
             </Link>
 
-            <Link to="/addjob" className="text-base font-medium text-gray-900 hover:text-opacity-50">
+            <Link
+              to="/addjob"
+              className="text-base font-medium text-gray-900 hover:text-opacity-50"
+            >
               Post Job
             </Link>
 
             {isProfileCreated && (
-              <Link to="/viewOrgProfile" className="text-base font-medium text-gray-900 hover:text-opacity-50">
+              <Link
+                to="/viewOrgProfile"
+                className="text-base font-medium text-gray-900 hover:text-opacity-50"
+              >
                 Profile
               </Link>
             )}

@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
-import styles from './UpdateOrgProfile.module.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import styles from "./UpdateOrgProfile.module.css";
+import axios from "axios";
 const OrgProfile = () => {
-  const [userName, setUserName] = useState('');
-  const [description, setDescription] = useState('');
-  const [roles, setRoles] = useState('');
+  const [userName, setUserName] = useState("");
+  const [description, setDescription] = useState("");
+  const [roles, setRoles] = useState("");
   const [logo, setLogo] = useState(null);
   const [logoURL, setLogoURL] = useState('');
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ const OrgProfile = () => {
             },
           }
         );
-        const {name,description,roles,logo} = response.data.data;
+        const { name, description, roles, logo } = response.data;
         setUserName(name);
         setDescription(description);
         setRoles(roles);
@@ -35,6 +35,8 @@ const OrgProfile = () => {
 
     fetchOrgData();
   }, []);
+
+  // Handle the change for logo file input
 
   const handleLogoChange = (e) => {
     setLogo(e.target.files[0]);
@@ -53,7 +55,7 @@ const OrgProfile = () => {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -70,7 +72,7 @@ const OrgProfile = () => {
     setLoading(true);
     try {
       const uploadedLogoURL = await logoUpload();
-      console.log('Uploaded Logo URL:', uploadedLogoURL);
+      console.log("Uploaded Logo URL:", uploadedLogoURL);
       setLogoURL(uploadedLogoURL);
       const formData ={
         "name":userName,
@@ -83,8 +85,8 @@ const OrgProfile = () => {
         formData,
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -100,15 +102,15 @@ const OrgProfile = () => {
 
   return (
     <main
-      className={styles['profile-container']}
+      className={styles["profile-container"]}
       style={{
         margin: 0,
         padding: 0,
-        fontFamily: 'Arial, sans-serif',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        fontFamily: "Arial, sans-serif",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white",
       }}
     >
       <section className={`${styles['profile-form-container']} ${styles['card']}`}>
@@ -122,40 +124,40 @@ const OrgProfile = () => {
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               placeholder="Enter Name"
-              className={styles['brutalist-input']}
+              className={styles["brutalist-input"]}
             />
           </div>
 
-          <div className={styles['form-group']}>
+          <div className={styles["form-group"]}>
             <label htmlFor="description">Description:</label>
             <textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter Description"
-              className={styles['brutalist-input']}
+              className={styles["brutalist-input"]}
             />
           </div>
 
-          <div className={styles['form-group']}>
+          <div className={styles["form-group"]}>
             <label htmlFor="roles">Roles Offered:</label>
             <textarea
               id="roles"
               value={roles}
               onChange={(e) => setRoles(e.target.value)}
               placeholder="Enter Roles Offered"
-              className={styles['brutalist-input']}
+              className={styles["brutalist-input"]}
             />
           </div>
 
-          <div className={styles['form-group']}>
+          <div className={styles["form-group"]}>
             <label htmlFor="logo">Upload Company Logo:</label>
             <input
               type="file"
               id="logo"
               accept="image/*"
               onChange={handleLogoChange}
-              className={styles['brutalist-input']}
+              className={styles["brutalist-input"]}
             />
             {/* {logo && <img src={URL.createObjectURL(logo)} alt="Profile" className={styles['profile-photo']} />} */}
             {logo ? (
@@ -169,11 +171,18 @@ const OrgProfile = () => {
           {error && <p className="text-red-500 mt-3 font-semibold">{error}</p>}
         </form>
       </section>
-      <section className={styles['profile-image-container']}>
-        <h1 style={{ fontFamily: 'monospace' }} className='font-bold h-auto text-2xl self-center text-black py-10'>
+      <section className={styles["profile-image-container"]}>
+        <h1
+          style={{ fontFamily: "monospace" }}
+          className="font-bold h-auto text-2xl self-center text-black py-10"
+        >
           "Empowering your mission with the right tools"
         </h1>
-        <img className={styles['object-fill']} src="/3714960.jpg" alt="Decorative" />
+        <img
+          className={styles["object-fill"]}
+          src="/3714960.jpg"
+          alt="Decorative"
+        />
       </section>
     </main>
   );

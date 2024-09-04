@@ -23,6 +23,7 @@ const jobSchema = new mongoose.Schema(
     company_description: String,
     Applicants: [String],
     embeddings: [Number],
+    userId:String
   },
   { timestamps: true }
 );

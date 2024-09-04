@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HiOutlineBookmark } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-function JobList() {
+function OrgJobList() {
   const [search, setSearch] = useState("");
   const [workingSchedule, setWorkingSchedule] = useState([]);
   const [employmentType, setEmploymentType] = useState([]);
@@ -12,14 +12,14 @@ function JobList() {
   useEffect(() => {
     const func = async () => {
       const res = await axios.get(
-        "http://localhost:4000/api/v1/jobs/get_all_job",
+        "http://localhost:4000/api/v1/jobs/get_company_job",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
-      setJobs(res.data);
+      setJobs(res.data.jobs);
       // .then(response => setJobs(response.data))
       // .catch(error => console.error('Error fetching jobs:', error));
     };
@@ -200,7 +200,7 @@ function JobList() {
                   </div>
                   <button
                     className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600 transition-colors"
-                    onClick={() => navigate(`/job/${job._id}`)}
+                    onClick={() => navigate(`/recruit/${job._id}`)}
                   >
                     Details
                   </button>
@@ -214,4 +214,4 @@ function JobList() {
   );
 }
 
-export default JobList;
+export default OrgJobList;

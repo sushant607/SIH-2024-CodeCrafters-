@@ -54,7 +54,12 @@ const OrgProfileSection = () => {
               <p>{description}</p>
             </div>
             <Link to="/updateOrgProfile">
-              <button type="button" className='bg-green-500 text-white border-none py-2 px-3 rounded cursor-pointer text-xs mt-2 self-center hover:bg-gray-700'>Update Profile</button>
+              <button
+                type="button"
+                className="bg-green-500 text-white border-none py-2 px-3 rounded cursor-pointer text-xs mt-2 self-center hover:bg-gray-700"
+              >
+                Update Profile
+              </button>
             </Link>
           </div>
         </div>

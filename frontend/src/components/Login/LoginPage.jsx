@@ -7,27 +7,26 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async () => {
-   
-  try {
-    const res = await axios.post("http://localhost:4000/api/v1/user/signin", {
-      username: username,
-      password: password,
-    });
+    try {
+      const res = await axios.post("http://localhost:4000/api/v1/user/signin", {
+        username: username,
+        password: password,
+      });
 
-    if (res.data.success) {
-      // Store token and user type in localStorage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("userType", res.data.userType); // Store the user type received from the server
+      if (res.data.success) {
+        // Store token and user type in localStorage
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userType", res.data.userType); // Store the user type received from the server
 
-      console.log('Login successful');
-      alert(" Login successful");
-      navigate("/"); // Redirect to the appropriate page (e.g., home or dashboard)
-    } 
-  } catch (error) {
-    console.log('An error occurred:', error);
-    alert(error.response.data.message || "Login failed.");
-    // Handle unexpected errors (e.g., show error message)
-  }
+        console.log("Login successful");
+        alert(" Login successful");
+        navigate("/"); // Redirect to the appropriate page (e.g., home or dashboard)
+      }
+    } catch (error) {
+      console.log("An error occurred:", error);
+      alert(error.response.data.message || "Login failed.");
+      // Handle unexpected errors (e.g., show error message)
+    }
   };
   return (
     <>
@@ -64,9 +63,19 @@ function LoginPage() {
               />
               <label className={styles.brutalistLabel}>PASSWORD</label>
             </div>
-            <p style={{fontFamily:"monospace",fontSize:"1.15rem"}}className="font-bold self-center" >New user? 
-              <Link to="/signup" style={{color:"#372bb2"}} className="underline ml-3">SIGNUP</Link>
-              </p>
+            <p
+              style={{ fontFamily: "monospace", fontSize: "1.15rem" }}
+              className="font-bold self-center"
+            >
+              New user?
+              <Link
+                to="/signup"
+                style={{ color: "#372bb2" }}
+                className="underline ml-3"
+              >
+                SIGNUP
+              </Link>
+            </p>
           </div>
           <div className="flex items-center">
             <button

@@ -18,12 +18,16 @@ const UpdateProfile = () => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/v1/freelancer/view_profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const { name, email, about, skills, resume, photo } = response.data.data;
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/freelancer/view_profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const { name, email, about, skills, resume, photo } =
+          response.data.data;
 
         setUserName(name);
         setEmail(email);
@@ -51,22 +55,22 @@ const UpdateProfile = () => {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-  
-      console.log('Resume upload response:', upload);
-  
+
+      console.log("Resume upload response:", upload);
+
       if (upload.data && upload.data.resumeURL) {
-        console.log('Uploaded Resume URL:', upload.data.resumeURL);
+        console.log("Uploaded Resume URL:", upload.data.resumeURL);
         return upload.data.resumeURL;
       } else {
-        console.error('Resume URL not found in response:', upload.data);
+        console.error("Resume URL not found in response:", upload.data);
         return null;
       }
     } catch (e) {
-      console.error('Error during resume upload:', e);
+      console.error("Error during resume upload:", e);
       return null;
     }
   };
@@ -120,7 +124,7 @@ const UpdateProfile = () => {
     try {
       const uploadedPhotoURL = await imageUpload();
       const uploadedResumeURL = await resumeUpload();
-  
+
       if (!uploadedPhotoURL || !uploadedResumeURL) {
         alert('Failed to upload files. Please try again.');
         console.error('Upload failure details:', { uploadedPhotoURL, uploadedResumeURL });
@@ -128,8 +132,8 @@ const UpdateProfile = () => {
         return;
       }
 
-      console.log('Uploaded Photo URL:', uploadedPhotoURL);
-      console.log('Uploaded Resume URL:', uploadedResumeURL);
+      console.log("Uploaded Photo URL:", uploadedPhotoURL);
+      console.log("Uploaded Resume URL:", uploadedResumeURL);
 
       // setPhotoURL(uploadedPhotoURL);
       // setResumeURL(uploadedResumeURL);
@@ -143,15 +147,15 @@ const UpdateProfile = () => {
         photo: uploadedPhotoURL,
       };
 
-      console.log('Form Data being sent:', formData);
-  
+      console.log("Form Data being sent:", formData);
+
       const response = await axios.put(
         "http://localhost:4000/api/v1/freelancer/update_profile",
         formData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );
@@ -178,7 +182,9 @@ const UpdateProfile = () => {
         backgroundColor: "white",
       }}
     >
-      <section className={`${styles["profile-form-container"]} ${styles["card"]}`}>
+      <section
+        className={`${styles["profile-form-container"]} ${styles["card"]}`}
+      >
         <h1 className={styles["profile-title"]}>UPDATE YOUR PROFILE</h1>
         <form onSubmit={handleSubmit} className={styles["profile-form"]}>
           <div className={styles["form-group"]}>
@@ -255,7 +261,9 @@ const UpdateProfile = () => {
             />
             {/* {photoURL && (
               <img
-                src={typeof photo === "string" ? photo : URL.createObjectURL(photo)}
+                src={
+                  typeof photo === "string" ? photo : URL.createObjectURL(photo)
+                }
                 alt="Profile"
                 className={styles["profile-photo"]}
                 style={{ maxWidth: "100px", borderRadius: "50%" }}
@@ -283,7 +291,11 @@ const UpdateProfile = () => {
         >
           "Little things make big days"
         </h1>
-        <img className={styles["object-fill"]} src="/3714960.jpg" alt="Decorative" />
+        <img
+          className={styles["object-fill"]}
+          src="/3714960.jpg"
+          alt="Decorative"
+        />
       </section>
     </main>
   );
