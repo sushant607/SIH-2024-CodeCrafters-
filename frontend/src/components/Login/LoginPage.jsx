@@ -20,7 +20,7 @@ function LoginPage() {
       localStorage.setItem("userType", res.data.userType); // Store the user type received from the server
 
       console.log('Login successful');
-      alert("login successful");
+      alert(" Login successful");
       navigate("/"); // Redirect to the appropriate page (e.g., home or dashboard)
     } 
   } catch (error) {
