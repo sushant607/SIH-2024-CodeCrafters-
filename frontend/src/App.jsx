@@ -36,7 +36,7 @@ function App() {
           <Route path='/myjobs' element={<MyJobPage />} />
           <Route path='/updateOrgProfile' element={<UpdateOrgProfile />} />
           <Route path='/jobList' element={<JobList />} />
-          <Route path='/orgJobList' element={<OrgPageListing />} />
+          <Route path='/orgJobList' element={<OrgJobList />} />
           <Route path='/signup' element={<SignupPage />} />
           <Route path='/createProfile' element={<CreateProfile/>} />
           <Route path='/updateProfile' element={<UpdateProfile/>} />

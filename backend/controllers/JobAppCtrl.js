@@ -38,23 +38,29 @@ const createJobApplication = async (req, res) => {
     return res.status(500).json({ message: "Server error, please try again" });
   }
 }; // Adjust the path as needed
- const getJobApplicationsByFreelancer = async (req, res) => {
+const getJobApplicationsByFreelancer = async (req, res) => {
   try {
-    const { freelancerId } = req.params;  // Extract freelancerId from URL
-    const jobApplications = await JobApplication.find({ freelancerId })
-      .populate('jobId', 'title description') // Populate job details
-      .exec();
+    const { freelancerId } = req.params; // Extract freelancerId from URL
+    const jobApplications = await JobApplication.find({ freelancerId });
 
     if (!jobApplications || jobApplications.length === 0) {
       return res.status(404).json({ message: 'No job applications found for this freelancer.' });
     }
 
-    res.status(200).json(jobApplications);
+    const jobs = await Promise.all(
+      jobApplications.map(async (application) => {
+        const job = await Job.findById(application.jobId);
+        return job; // Add the job to the array
+      })
+    );
+
+    res.status(200).json(jobs);
   } catch (error) {
     console.error('Error fetching job applications:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
 
 
 export { createJobApplication,getJobApplicationsByFreelancer };
