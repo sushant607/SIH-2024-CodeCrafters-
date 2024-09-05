@@ -12,7 +12,7 @@ router.post("/profile", authMiddleware, applyFreelancerController);
 //VIEW_Profile || GET
 router.get("/view_profile", authMiddleware, FreelancerInfoController);
 
-router.get("view_profile/:id", authMiddleware, getFreelancerbyid);
+router.get("/view_profile/:id", authMiddleware, getFreelancerbyid);
 
 //Update_Profile || GET
 router.put("/update_profile", authMiddleware, updateProfileController);

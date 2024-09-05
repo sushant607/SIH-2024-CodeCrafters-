@@ -171,7 +171,7 @@ function JobList() {
                     {job.company}
                   </p>
                   <div className="flex justify-between items-center mt-2">
-                    <p className="text-lg font-semibold">{job.role}</p>
+                    <p className="text-lg font-semibold w-40">{job.role}</p>
                     {/* Check if job.logo exists, else show default avatar */}
                     <img
                       src={

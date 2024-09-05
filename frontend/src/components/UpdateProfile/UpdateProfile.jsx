@@ -41,7 +41,7 @@ const UpdateProfile = () => {
     };
 
     fetchProfileData();
-  }, [token]);
+  }, []);
 
   const resumeUpload = async () => {
     if (!resume || typeof resume === "string") return resumeURL;
@@ -66,8 +66,8 @@ const UpdateProfile = () => {
         console.log("Uploaded Resume URL:", upload.data.resumeURL);
         return upload.data.resumeURL;
       } else {
-        console.error("Resume URL not found in response:", upload.data);
-        return null;
+        console.error('Resume URL not found in response:', upload.data);
+        return resumeURL;
       }
     } catch (e) {
       console.error("Error during resume upload:", e);
