@@ -19,6 +19,7 @@ function OrgJobList() {
           },
         }
       );
+      console.log(res.data.jobs)
       setJobs(res.data.jobs);
       // .then(response => setJobs(response.data))
       // .catch(error => console.error('Error fetching jobs:', error));

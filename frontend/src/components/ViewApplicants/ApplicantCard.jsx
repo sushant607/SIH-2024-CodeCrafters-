@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "./ApplicantCard.css";
-import dropdown from "../../../public/dropdown.png";
+// import dropdown from "../../../public/dropdown.png";
 const ApplicantCard = (props) => {
   const [detail, setDetail] = useState(false);
   return (
@@ -25,7 +25,7 @@ const ApplicantCard = (props) => {
       )}
       <div className='img-cont'>
         <img
-          src={dropdown}
+          src='/dropdown.png'
           alt='dropdown'
           onClick={() => {
             setDetail(!detail);

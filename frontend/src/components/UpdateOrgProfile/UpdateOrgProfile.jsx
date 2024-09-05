@@ -20,7 +20,7 @@ const OrgProfile = () => {
             },
           }
         );
-        const { name, description, roles, logo } = response.data;
+        const { name, description, roles, logo } = response.data.data;
         setUserName(name);
         setDescription(description);
         setRoles(roles);
