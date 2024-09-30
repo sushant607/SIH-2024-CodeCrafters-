@@ -47,7 +47,7 @@ const UserNavbar = () => {
               to="/home"
               className="flex rounded outline-none text-2xl font-bold focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
             >
-              FREELANZA
+              JOBCONNECT
             </Link>
           </div>
 

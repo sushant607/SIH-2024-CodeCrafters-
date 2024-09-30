@@ -46,14 +46,14 @@ const getJobApplicationsByFreelancer = async (req, res) => {
     if (!jobApplications || jobApplications.length === 0) {
       return res.status(404).json({ message: 'No job applications found for this freelancer.' });
     }
-
+    console.log(jobApplications)
     const jobs = await Promise.all(
       jobApplications.map(async (application) => {
         const job = await Job.findById(application.jobId);
         return job; // Add the job to the array
       })
     );
-
+    console.log(jobs)
     res.status(200).json(jobs);
   } catch (error) {
     console.error('Error fetching job applications:', error);

@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <main className="home-cont">
       <section className="content">
-        <div className="title">Freelanza</div>
+        <div className="title">Jobconnect</div>
         <p className="desc">
           A dynamic platform where employers can post job opportunities and
           connect with skilled freelancers. Browse profiles, review portfolios,

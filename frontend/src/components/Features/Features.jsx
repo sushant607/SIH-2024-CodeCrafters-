@@ -62,7 +62,7 @@ const Features = () => {
             <p className="mt-5 text-base text-gray-600 font-pj">
               Work with confidence using our secure escrow payment system that
               holds funds until project milestones are met, ensuring trust and
-              satisfaction for both freelancers and clients.
+              satisfaction for both graduates and clients.
             </p>
           </div>
 
@@ -123,7 +123,7 @@ const Features = () => {
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
               Experience smarter connections with our AI-powered system that
-              recommends the best jobs for freelancers and the most suitable
+              recommends the best jobs for graduates and the most suitable
               talents for clients, tailored to your preferences and skills.
             </p>
           </div>
@@ -172,10 +172,10 @@ const Features = () => {
               />
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Client and Freelancer Messaging
+              Client and Graduate Messaging
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Communicate effectively with clients or freelancers using our
+              Communicate effectively with clients or graduates using our
               real-time messaging system, keeping all project discussions in one
               place.
             </p>
@@ -303,10 +303,10 @@ const Features = () => {
               />
             </svg>
             <h3 className="mt-12 text-xl font-bold text-gray-900 font-pj">
-              Freelancer Connect
+              Graduate Connect
             </h3>
             <p className="mt-5 text-base text-gray-600 font-pj">
-              Join a vibrant community of freelancers to network, share
+              Join a vibrant community of graduates to network, share
               knowledge, collaborate on projects, and help each other grow
               professionally.
             </p>
