@@ -1,5 +1,5 @@
 <h1 align="center">
-  FreeLanza- World's #1 Task Manager
+  FreeLanza- World's #1 Job Recruiting Platform
 </h1>
 
 <div align="center">
@@ -49,27 +49,22 @@ A dynamic platform where employers can post job opportunities and connect with s
 
 Fully Implemented features of the project:
 
-- [x] Successful implementation of the database.
-- [x] Create, Update, Delete Operations on List
-- [x] User Authentication
-- [x] Login with Google option
+- [x] Login and signup page for both freelancers and organizations
+- [x] Dashboard for freelancers to view and apply for available jobs
+- [x] Dashboard for Organizations to post new jobs and recruit freelancers
+- [x] Allows users to create/update profiles
+- [x] AI based recommender systems to search jobs based on your skills
 
 ## 🔮Future Scope <a id="future-scope"></a>
 
-- Adding reminders and notifications.
-- Add a sound on creating,updating or deleting the list.
+- Implementing ESCROW accounts to manage payments
+- Create a chat interface for freelancers to interact and collaborate with organizers
 
-## 💸Applications <a id="applications"></a>
-
-- Task Management: ToDo helps users to keep track of tasks that need to be done. It can help them to manage their workload and ensure that they don’t forget anything important.
-- Priotization: By listing out all the tasks, the users can easily see what needs to be done and prioritize tasks based on their importance or urgency.
-- Productivity Enhancement: Having a clear list of tasks can increase productivity as it provides a structured approach to task completion.
-- A To-Do list can reduce stress by providing a clear plan of action, which can lead to better sleep and a more peaceful mind.
 
 ## 🛠Project Setup <a id="project-setup"></a>
 
 First step is to clone the repository <br>
-``` https://github.com/KartikGupta2004/ToDo-List.git ```
+``` https://github.com/divyannshu/SIH-2024-CodeCrafters- ```
 
 Have the latest version of node js and react app.
 ```
