@@ -12,7 +12,7 @@ function OrgJobList() {
   useEffect(() => {
     const func = async () => {
       const res = await axios.get(
-        "https://sih-2024-codecrafters-1.onrender.com",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/jobs/get_company_job",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
