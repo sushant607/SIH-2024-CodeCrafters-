@@ -19,7 +19,7 @@ const UpdateProfile = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/freelancer/view_profile",
+          "https://sih-2024-codecrafters-1.onrender.com",
           {
             headers: {
               Authorization: `Bearer ${token}`,
