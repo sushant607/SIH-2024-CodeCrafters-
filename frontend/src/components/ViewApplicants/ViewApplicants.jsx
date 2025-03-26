@@ -16,7 +16,7 @@ const ViewApplicants = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:4000/api/v1/jobs/get_id_job/${id}`,
+        `https://sih-2024-codecrafters-1.onrender.com`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
