@@ -41,7 +41,7 @@ const CreateProfile = () => {
     formData.append("file", resume);
     try {
       const upload = await axios.post(
-        "https://sih-2024-codecrafters-1.onrender.com",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/upload_image",
         formData,
         {
           headers: {
