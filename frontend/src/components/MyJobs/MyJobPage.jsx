@@ -31,7 +31,7 @@ const MyJobPage = () => {
 
     const fetchJobDetails = async (id) => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/freelancejobs/my_jobs/${id}`, {
+        const response = await axios.get(`https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancejobs/my_jobs/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
