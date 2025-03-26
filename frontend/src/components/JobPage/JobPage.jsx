@@ -13,7 +13,7 @@ const JobPage = () => {
     const fetchJob = async () => {
       try {
         const res = await axios.get(
-          `https://sih-2024-codecrafters-1.onrender.com`,
+          `https://sih-2024-codecrafters-1.onrender.com/api/v1/jobs/get_id_job/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
