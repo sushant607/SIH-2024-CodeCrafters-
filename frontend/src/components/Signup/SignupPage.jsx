@@ -13,7 +13,7 @@ function SignupPage() {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v1/user/register",
+        "https://sih-2024-codecrafters-1.onrender.com",
         {
           username: username,
           password: password,
