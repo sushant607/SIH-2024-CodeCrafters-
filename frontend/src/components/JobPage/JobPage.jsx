@@ -37,7 +37,7 @@ const JobPage = () => {
         jobId: id
       };
 
-      const res = await axios.post('http://localhost:4000/api/v1/freelancejobs/apply', applicationData, {
+      const res = await axios.post('https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancejobs/apply', applicationData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
