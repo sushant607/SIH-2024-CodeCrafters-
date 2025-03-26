@@ -8,7 +8,7 @@ function LoginPage() {
   const navigate = useNavigate();
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("https://sih-2024-codecrafters-1.onrender.com", {
+      const res = await axios.post("https://sih-2024-codecrafters-1.onrender.com/api/v1/user/signin", {
         username: username,
         password: password,
       });
