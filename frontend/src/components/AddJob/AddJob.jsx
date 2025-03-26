@@ -48,7 +48,7 @@ const AddJob = () => {
     console.log(data);
     try {
       const response = await axios.post(
-        "https://sih-2024-codecrafters-1.onrender.com",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/jobs/create_job",
         { ...data },
         {
           headers: {
