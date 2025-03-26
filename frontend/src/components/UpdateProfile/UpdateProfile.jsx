@@ -50,7 +50,7 @@ const UpdateProfile = () => {
     formData.append("file", resume);
     try {
       const upload = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/upload_resume",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/upload_resume",
         formData,
         {
           headers: {
@@ -83,7 +83,7 @@ const UpdateProfile = () => {
       formData.append("file", photo);
       try {
         const upload = await axios.post(
-          "http://localhost:4000/api/v1/freelancer/upload_image",
+          "https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/upload_image",
           formData,
           {
             headers: {
@@ -150,7 +150,7 @@ const UpdateProfile = () => {
       console.log("Form Data being sent:", formData);
 
       const response = await axios.put(
-        "http://localhost:4000/api/v1/freelancer/update_profile",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/update_profile",
         formData,
         {
           headers: {
