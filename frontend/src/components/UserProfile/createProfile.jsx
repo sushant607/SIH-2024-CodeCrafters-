@@ -122,7 +122,7 @@ const CreateProfile = () => {
       console.log("Form Data being sent:", formData);
 
       const response = await axios.post(
-        "http://localhost:4000/api/v1/freelancer/profile",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/profile",
         formData,
         {
           headers: {
