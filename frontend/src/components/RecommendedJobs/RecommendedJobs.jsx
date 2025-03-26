@@ -12,7 +12,7 @@ function RecommendedJobs() {
   useEffect(() => {
     const func = async () => {
       const res = await axios.get(
-        "http://localhost:4000/api/v1/freelancer/recommendJobs",
+        "https://sih-2024-codecrafters-1.onrender.com",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
