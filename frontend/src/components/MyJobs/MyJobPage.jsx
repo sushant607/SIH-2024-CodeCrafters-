@@ -17,7 +17,7 @@ const MyJobPage = () => {
 
     const fetchFreelancerId = async () => {
       try {
-        const response = await axios.get('https://sih-2024-codecrafters-1.onrender.com', {
+        const response = await axios.get('https://sih-2024-codecrafters-1.onrender.com/api/v1/user/signin', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
