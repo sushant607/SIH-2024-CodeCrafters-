@@ -13,7 +13,7 @@ const OrgProfile = () => {
     const fetchOrgData = async () => {
       try {
         const response = await axios.get(
-          "https://sih-2024-codecrafters-1.onrender.com",
+          "https://sih-2024-codecrafters-1.onrender.com/api/v1/org/view_profile",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
