@@ -23,7 +23,7 @@ const OrgProfile = () => {
     formData.append("file", logo);
     try {
       const upload = await axios.post(
-        "https://sih-2024-codecrafters-1.onrender.com",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/org/upload_logo",
         formData,
         {
           headers: {
