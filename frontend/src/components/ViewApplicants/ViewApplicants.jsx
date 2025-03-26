@@ -16,7 +16,7 @@ const ViewApplicants = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `https://sih-2024-codecrafters-1.onrender.com`,
+        `https://sih-2024-codecrafters-1.onrender.com/api/v1/jobs/get_id_job/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +39,7 @@ const ViewApplicants = () => {
       try {
         const applicantPromises = job.Applicants.map(async (applicantId) => {
           const response = await axios.get(
-            `http://localhost:4000/api/v1/freelancer/view_profile/${applicantId}`,
+            `https://sih-2024-codecrafters-1.onrender.com/api/v1/freelancer/view_profile/${applicantId}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
