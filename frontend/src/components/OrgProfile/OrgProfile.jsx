@@ -58,7 +58,7 @@ const OrgProfile = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:4000/api/v1/org/create_org",
+        "https://sih-2024-codecrafters-1.onrender.com/api/v1/org/create_org",
         formData,
         {
           headers: {
