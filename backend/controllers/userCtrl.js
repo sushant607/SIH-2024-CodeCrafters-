@@ -18,7 +18,7 @@ const loginController = async (req, res) => {
     );
     if (!isMatch) {
       return res
-        .status(400)
+        .status(401)
         .send({ message: "Invalid username or Password", success: false });
     }
     const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
@@ -32,7 +32,7 @@ const loginController = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error logging in" });
+    res.status(404).json({ message: "Error logging in" });
   }
 };
 
